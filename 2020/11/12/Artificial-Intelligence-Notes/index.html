@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AI,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第二章 知识表示2.1 知识与知识表示基本概念 知识的获取、知识的表示和运用知识进行推理是人工智能学科研究的3个主要问题  2.1.1 知识的含义和结构 知识、信息与数据（三个层次的概念） 数据：是记录信息的符号，是信息的载体和表示 信息：是对数据的解释，是数据在具体的场合下具体的含义 知识：把有关信息关联在一起所形成的信息结构    2.1.2 知识的种类与特性 2.1.4 知识表示 面向计算机">
+<meta name="keywords" content="AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Artificial Intelligence Notes">
+<meta property="og:url" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/index.html">
+<meta property="og:site_name" content="Xiang Li">
+<meta property="og:description" content="第二章 知识表示2.1 知识与知识表示基本概念 知识的获取、知识的表示和运用知识进行推理是人工智能学科研究的3个主要问题  2.1.1 知识的含义和结构 知识、信息与数据（三个层次的概念） 数据：是记录信息的符号，是信息的载体和表示 信息：是对数据的解释，是数据在具体的场合下具体的含义 知识：把有关信息关联在一起所形成的信息结构    2.1.2 知识的种类与特性 2.1.4 知识表示 面向计算机">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.1.2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.3.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.4-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.4-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.4-3.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.5.2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.2.1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.2.2-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.2.2-2.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.4.3.png">
+<meta property="og:updated_time" content="2021-08-22T13:44:10.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Artificial Intelligence Notes">
+<meta name="twitter:description" content="第二章 知识表示2.1 知识与知识表示基本概念 知识的获取、知识的表示和运用知识进行推理是人工智能学科研究的3个主要问题  2.1.1 知识的含义和结构 知识、信息与数据（三个层次的概念） 数据：是记录信息的符号，是信息的载体和表示 信息：是对数据的解释，是数据在具体的场合下具体的含义 知识：把有关信息关联在一起所形成的信息结构    2.1.2 知识的种类与特性 2.1.4 知识表示 面向计算机">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.1.2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/">
+
+
+
+
+
+  <title>Artificial Intelligence Notes | Xiang Li</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiang Li</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Harbin Institute of Technology, Shenzhen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/12/Artificial-Intelligence-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiang Li">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiang Li">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Artificial Intelligence Notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-12T11:19:16+08:00">
+                2020-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index">
+                    <span itemprop="name">Courses</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/Artificial-Intelligence/" itemprop="url" rel="index">
+                    <span itemprop="name">Artificial Intelligence</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第二章-知识表示"><a href="#第二章-知识表示" class="headerlink" title="第二章 知识表示"></a>第二章 知识表示</h1><h2 id="2-1-知识与知识表示基本概念"><a href="#2-1-知识与知识表示基本概念" class="headerlink" title="2.1 知识与知识表示基本概念"></a>2.1 知识与知识表示基本概念</h2><ul>
+<li><strong>知识的获取</strong>、<strong>知识的表示</strong>和<strong>运用知识进行推理</strong>是人工智能学科研究的<strong>3</strong>个主要问题</li>
+</ul>
+<h3 id="2-1-1-知识的含义和结构"><a href="#2-1-1-知识的含义和结构" class="headerlink" title="2.1.1 知识的含义和结构"></a>2.1.1 知识的含义和结构</h3><ul>
+<li>知识、信息与数据（三个层次的概念）<ul>
+<li>数据：是记录信息的符号，是信息的载体和表示</li>
+<li>信息：是对数据的解释，是数据在具体的场合下具体的含义</li>
+<li>知识：把有关信息关联在一起所形成的信息结构</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-2-知识的种类与特性"><a href="#2-1-2-知识的种类与特性" class="headerlink" title="2.1.2 知识的种类与特性"></a>2.1.2 知识的种类与特性</h3><p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.1.2.png" alt="image" style="zoom:50%;"></p>
+<h3 id="2-1-4-知识表示"><a href="#2-1-4-知识表示" class="headerlink" title="2.1.4 知识表示"></a>2.1.4 知识表示</h3><ul>
+<li>面向计算机的知识描述或表达的形式和方法</li>
+<li>知识表示的过程就是把知识编码成某种数据结构的过程</li>
+</ul>
+<h2 id="2-2-一阶谓词逻辑表示法"><a href="#2-2-一阶谓词逻辑表示法" class="headerlink" title="2.2 一阶谓词逻辑表示法"></a>2.2 一阶谓词逻辑表示法</h2><ul>
+<li><strong>个体域</strong> ：个体变元的变化范围</li>
+</ul>
+<h3 id="2-2-1-谓词、函数、量词"><a href="#2-2-1-谓词、函数、量词" class="headerlink" title="2.2.1 谓词、函数、量词"></a>2.2.1 谓词、函数、量词</h3><ul>
+<li><p><strong>n元谓词</strong> ：$P(x_1, x_2, \cdots, x_n)$ 。$P$ 为谓词符号(<strong>大写</strong>)，$x_i$ 为参量(项/个体)</p>
+</li>
+<li><p><strong>n元个体函数</strong>(函数)：$f(x_1,x_2,\cdots,x_n)$ 表达个体之间的对应关系。$f$ 函数符号(<strong>小写</strong>)， $x_i$个体变元</p>
+</li>
+<li><p><strong>量词</strong>：</p>
+<ul>
+<li>全称量词$\forall x$：“所有”，“一切”，“任一”，“全体”，“凡是”</li>
+<li>存在量词$\exist x$ : “存在” “有些” “至少有一个” “有的“</li>
+</ul>
+</li>
+<li><p>e.g. </p>
+<ul>
+<li><blockquote>
+<p>(1)所有的人都是要死的</p>
+<p>(2)有的人活到100岁以上</p>
+</blockquote>
+</li>
+<li><p>在个体域D为人类集合时，可符号化为：(1)$(\forall x)P(x)$，$P(x)$ 表示$x$是要死的。(2)$(\exist x)Q(x)$， $Q(x)$表示$x$活到100岁以上</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-2-谓词公式"><a href="#2-2-2-谓词公式" class="headerlink" title="2.2.2 谓词公式"></a>2.2.2 谓词公式</h3><p>用<strong>谓词联接符号</strong>将一些谓词联接起来所形成的公式</p>
+<ul>
+<li><strong>联结符号</strong>：优先级从高到低： $\neg$ 否定(非)  |   $\wedge$ 合取(与)  |  $\vee$ 析取(或)  | $\rightarrow$ 蕴含 (IF…THEN)  |  $\leftrightarrow$ 等价(当且仅当) <ul>
+<li>e.g. “机器人不在2号房间”：$\neg INROOM(Robot, R2)$ </li>
+<li>2.g. “如果小王跑得最快，那么他获得冠军“：$RUN(Wang, Fastest)\rightarrow WIN(Wang, CHampion)$</li>
+</ul>
+</li>
+<li><strong>辖域</strong>：紧接于量词之后被量词作用(即说明)的谓词公式称为该量词的辖域<ul>
+<li>全称量词辖域</li>
+<li>存在量词辖域</li>
+</ul>
+</li>
+<li><strong>指导变元</strong>：量词后面的变元</li>
+<li><strong>约束变元</strong>：在一个量词的辖域中的与该量词的指导变元相同的变元</li>
+<li><strong>自由变元</strong>：其他的变元</li>
+<li><strong>改名规则</strong> ：一个变元在一个谓词公式中既可约束出现，又可自由 出现，为了避免混淆，通常通过改名规则，使得一个谓词 公式中一个变元仅以一种形式出现。如对于$\exist xP(x)\wedge B(x)$<ul>
+<li>换名规则：将某个<strong>约束变元</strong>及其对应的<strong>指导变元</strong>改为本辖域内没有出现过的个体变元符号。$\exist uP(u)\wedge B(x)$</li>
+<li>代替规则：将某量词辖域中出现的某个<strong>自由变元</strong>的所有出现改为本辖域内没有出现过的个体变元符号。$\exist xP(x)\wedge B(u)$</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-5-谓词逻辑表示法的特点"><a href="#2-2-5-谓词逻辑表示法的特点" class="headerlink" title="2.2.5 谓词逻辑表示法的特点"></a>2.2.5 谓词逻辑表示法的特点</h3><ul>
+<li>主要优点：<ul>
+<li><strong>严密性</strong>。可以保证其演绎推理结果的正确性， 可以较精确的表达知识</li>
+<li><strong>自然性</strong>。谓词逻辑是一种接近于自然语言的形 式语言。</li>
+<li><strong>通用性</strong>。拥有通用的逻辑演算方法和推理的规则。</li>
+<li><strong>易于实现</strong>。用它表示的知识易于模块化，便于知识的增删及修改，便于在计算机上实现</li>
+</ul>
+</li>
+<li>主要缺点：<ul>
+<li><strong>知识表示能力差</strong>。不便于表达和加入非确定性、 启发性知识等</li>
+<li><strong>组合爆炸</strong>。在其推理过程中，随着事实数目的增大及盲目的使用推例规则，有可能形成组合爆炸</li>
+<li><strong>效率低</strong>。由于推理是根据形式逻辑进行的，把推 理演算与知识含义截然分开，抛弃了表达内容中所含有的语义信息，往往使推理过程太冗长，降低了系统的效率。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-产生式表示法"><a href="#2-3-产生式表示法" class="headerlink" title="2.3 产生式表示法"></a>2.3 产生式表示法</h2><p>适合表示<strong>事实性知识</strong>和<strong>规则性知识</strong></p>
+<h3 id="2-3-1-知识的产生式表示方法"><a href="#2-3-1-知识的产生式表示方法" class="headerlink" title="2.3.1 知识的产生式表示方法"></a>2.3.1 知识的产生式表示方法</h3><ul>
+<li><p>事实的表示：</p>
+<ul>
+<li><p>事实：断言一个语言变量的值或断言多个语言变量之间关系的陈述句。</p>
+<ul>
+<li><blockquote>
+<p>“雪是白的”，“王峰热爱祖国”</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>事实的表示：</p>
+<ul>
+<li>确定性知识：（对象，属性，值）：(snow, color, white） (关系，对象1，对象2)：(love, Wang Feng, country)</li>
+<li>非确定性知识：（对象，属性，值，可信度因子）[0,1]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>规则的表示（产生式/规则）</p>
+<ul>
+<li><p>产生式的基本形式： $P\rightarrow Q$ 或者$IF\ P\ THEN\ Q$ 其中$P$ 是前提（可用的条件/前件），$Q$是结论（应该执行的操作/后件）</p>
+</li>
+<li><blockquote>
+<p>“如果王宏是计算机系学生，则王宏会编程序”</p>
+<p>IF 该学生是计算机专业THEN 该学生会编程序</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-5-产生式系统的特点"><a href="#2-3-5-产生式系统的特点" class="headerlink" title="2.3.5 产生式系统的特点"></a>2.3.5 产生式系统的特点</h3><ul>
+<li>主要优点：<ul>
+<li><strong>自然性</strong>:采用”如果……，则……”的形式，人类的判断性知识基本一致</li>
+<li><strong>模块性</strong>: 每条产生式规则都是一个独立的的知识单元，各规则之间不存在相 互调用关系，这就大大增加了规则的模块性</li>
+<li><strong>有效性</strong>:产生式知识表示法既可以表示确定性知识，又可以表示不确定性 知识。</li>
+</ul>
+</li>
+<li>主要缺点：<ul>
+<li><strong>效率较低</strong>: 各规则之间的联系必须以综合数据库为媒介。并且，其求解过 程是一种反复进行的”匹配一冲突消解一执行”过程。这样的执行方式将导致 执行的低效率。</li>
+<li><strong>不便于表示结构性知识</strong>：由于产生式表示中的知识具有一致格式，且规则 之间不能相互调用，因此那种具有结构关系或层次关系的知识则很难以自 然的方式来表示</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-语义网络表示法"><a href="#2-4-语义网络表示法" class="headerlink" title="2.4 语义网络表示法"></a>2.4 语义网络表示法</h2><h3 id="2-4-1-概述"><a href="#2-4-1-概述" class="headerlink" title="2.4.1 概述"></a>2.4.1 概述</h3><ul>
+<li>概念：通过概念及语义关系来表示知识的一种网络图，它是一个带标注的有向图<ul>
+<li>图中的各个<strong>节点</strong>表示各种概念、事物、对象、 行为、状态等</li>
+<li>图中的<strong>有向弧</strong>表示节点间的联系或关系</li>
+</ul>
+</li>
+<li>基本表示：由最基本的语义单元（<strong>语义基元</strong>）组成，可用<strong>(节点1，弧，节点2)</strong> 的三元组表示，或有向图表示</li>
+<li><strong>语义网络</strong>：把多个基本网元用相应的语义联系关联在一起的到；其节点还可以是一个语义子网络，因此，语义网络实质上是一种<strong>多层次</strong>的嵌套结构。</li>
+</ul>
+<h3 id="2-4-2-基本语义关系"><a href="#2-4-2-基本语义关系" class="headerlink" title="2.4.2 基本语义关系"></a>2.4.2 基本语义关系</h3><ol>
+<li><p>实例关系：ISA（<em>具体与抽象</em>，“是一个”，表示一个事物是另一个事物的实例）</p>
+<blockquote>
+<p>张三 ISA 人</p>
+</blockquote>
+</li>
+<li><p>分类关系：AKO（<em>子类与超类</em>，“是一种”，表示一个事物是另一个事物的一种类型）</p>
+<blockquote>
+<p>鸵鸟 AKO 鸟类</p>
+</blockquote>
+</li>
+<li><p>成员关系：A-Member-of （<em>个体与集体</em>，“是一员”， 表示一个事物是另一个事物的一个成员）</p>
+<blockquote>
+<p>希拉里 A-Member-of 民主党</p>
+</blockquote>
+<p><strong>1～3具有属性的继承性</strong></p>
+</li>
+<li><p>包含关系：Part-of （<em>部分与整体</em>，”是一部分“，表示一个事物是另一个事物的一部分）<strong>不具备属性的继承性</strong></p>
+<blockquote>
+<p>两只手 Part-of 人体</p>
+</blockquote>
+</li>
+<li><p>属性关系：Have （“有”，表示一个节点具有另一个节点所描述的属性）Can （“会”，表示一个节点能做另一个节点的事情）</p>
+<blockquote>
+<p>鸟 Have 翅膀</p>
+<p>张强 Age 18</p>
+</blockquote>
+</li>
+<li><p>时间关系 （不同事件在发生时间方面的先后次序关系）Before  After</p>
+<blockquote>
+<p>张三入学 Before 李四入学</p>
+<p>上海世博会 After 北京奥运会</p>
+</blockquote>
+</li>
+<li><p>位置关系（不同事物在位置方面的关系）Located-on, Located-under, Located-at, Located-inside, Located-outside</p>
+<blockquote>
+<p>加油站 Located-at 北京路</p>
+</blockquote>
+</li>
+<li><p>相近关系 Similar-to, Near-to</p>
+<blockquote>
+<p>猫 Similar-to 虎</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="2-4-3-事物和概念的表示"><a href="#2-4-3-事物和概念的表示" class="headerlink" title="2.4.3 事物和概念的表示"></a>2.4.3 事物和概念的表示</h3><ul>
+<li><p>一元关系：可以用一元谓词P(x)表示的关系，谓词P说明实体的性质、属性等，常用:“是”、”有”、”会”、”能”等语义关系来说明。</p>
+<blockquote>
+<p>动物能运动、会吃</p>
+</blockquote>
+</li>
+<li><p>二元关系：指可用二元谓词P(x，y)表示的关系。其中， x，y为实体， P为实体之间的关系</p>
+<blockquote>
+<p>动物能运动、会吃。鸟是一种动物，鸟有翅膀、会飞。鱼是一种动物，鱼生活在水中、 会游泳。</p>
+</blockquote>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.3.png" alt="image" style="zoom:50%;"></p>
+</li>
+<li><p>多元关系: 可用多元谓词P(x1 , x2, ……)表示的关系。其中， x1 , x2, ……为实 体，谓词P说明这些实体之间的关系</p>
+</li>
+</ul>
+<h3 id="2-4-4-情况和动作的表示"><a href="#2-4-4-情况和动作的表示" class="headerlink" title="2.4.4 情况和动作的表示"></a>2.4.4 情况和动作的表示</h3><h4 id="1-情况的表示"><a href="#1-情况的表示" class="headerlink" title="1. 情况的表示"></a>1. 情况的表示</h4><p>增加<strong>情况</strong>和动作结点的描述方法</p>
+<ul>
+<li><blockquote>
+<p>小燕子这只燕子从春天到秋天占有一个巢</p>
+</blockquote>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.4-1.png" alt="image" style="zoom:50%;"></p>
+</li>
+</ul>
+<h4 id="2-事件和动作的表示"><a href="#2-事件和动作的表示" class="headerlink" title="2. 事件和动作的表示"></a>2. 事件和动作的表示</h4><p>需要设立一个<strong>事件节点</strong>或<strong>动作结点</strong>。其中，事件节点由一些向外引出的弧来指出事件行为及发出者与接受者。 动作结点由一些向外引出的孤来指出动作的主体与客体。</p>
+<ul>
+<li><blockquote>
+<p>常河给江涛一个优盘</p>
+</blockquote>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.4-2.png" alt="image" style="zoom:50%;"></p>
+<ul>
+<li>用事件节点表示</li>
+</ul>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.4.4-3.png" alt="image" style="zoom:50%;"></p>
+<ul>
+<li>用动作节点表示</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-5-基于语义网络的推理"><a href="#2-4-5-基于语义网络的推理" class="headerlink" title="2.4.5 基于语义网络的推理"></a>2.4.5 基于语义网络的推理</h3><p>语义网络的推理过程主要有两种，一种是<strong>继承</strong>，另一种是<strong>匹配</strong></p>
+<ul>
+<li><p><strong>继承</strong> ：把对事物的描述从抽象结点传递到实例结点。通过继承可以得到所需 结点的一些属性值，它通常是沿着ISA、AKO等继承弧进行的</p>
+<blockquote>
+<p>用语义网络表示: 动物能运动、会吃。 鸟是一种动物，鸟有翅膀、会飞。 麻雀有爪子，麻雀是一种鸟。 小麻雀是一只麻雀。</p>
+<p>推理:小麻雀有哪些属性?</p>
+</blockquote>
+</li>
+<li><p><strong>匹配</strong> ：在知识库的语义网络中寻找与待求解问题相符的语义网络模式</p>
+<blockquote>
+<p>设在语义网络系统的知识库中存在以下事实的语义网络:哈尔滨工业大学是一所学校，位于哈尔滨市，成立于1920年。</p>
+<p>用语义网络进行推理求解哈尔滨工业大学位于哪个城市?</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-4-6-语义网络表示法的特点"><a href="#2-4-6-语义网络表示法的特点" class="headerlink" title="2.4.6 语义网络表示法的特点"></a>2.4.6 语义网络表示法的特点</h3><ul>
+<li>主要优点：<ul>
+<li><strong>结构性</strong>:采用把事物的属性以及事物间的各种语义联系显式地表示出来，是一种 结构化的知识表示方法。</li>
+<li><strong>联想性:</strong> 本来是作为人类联想记忆模型提出来的，它着重强调事物间的语义联系， 体现了人类的联想思维过程。</li>
+<li><strong>自索引性:</strong> 把各接点之间的联系以明确、简洁的方式表示出来，通过与某一结点 连结的弧可以很容易的找出与该结点有关的信息，而不必查找整个知识库。这 种自索引能力有效的避免搜索时所遇到的组合爆炸问题</li>
+</ul>
+</li>
+<li>主要缺点：<ul>
+<li><strong>非严格性</strong>:没有象谓词那样严格的形式表示体系，一个给定语义网络的含义完全 依赖于处理程序对它所进行的解释，通过语义网络所实现的推理不能保证其正 确性。</li>
+<li><strong>复杂性</strong>:语义网络表示知识的手段是多种多样的，这虽然对其表示带来了灵活性， 但同时也由于表示形式的不一致，使得它的处理增加了复杂性。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-5-框架表示法"><a href="#2-5-框架表示法" class="headerlink" title="2.5 框架表示法"></a>2.5 框架表示法</h2><h3 id="2-5-1-框架表示法概述"><a href="#2-5-1-框架表示法概述" class="headerlink" title="2.5.1 框架表示法概述"></a>2.5.1 框架表示法概述</h3><ul>
+<li><strong>框架</strong> ：人们认识事物的一种通用的数据结构形式。即当新情况发生时， 人们只要把新的数据加入到该通用数据结构中，便可形成一个具体的 实体(类)，这样的通用数据结构就称为框架。</li>
+<li><strong>实例框架</strong> ：对于一个框架，当人们才把观察或认识到的具体细节填入后， 就得到了该框架的一个具体实例，框架的这种具体实例被称为实例框 架.</li>
+<li><strong>框架系统</strong> ：在框架理论中，框架是知识的基本单位，把一组有关的框架连 结起来使可形成一个框架系统</li>
+<li><strong>框架系统推理</strong>：由框架之间的协调来完成</li>
+</ul>
+<h3 id="2-5-2-框架的组成"><a href="#2-5-2-框架的组成" class="headerlink" title="2.5.2 框架的组成"></a>2.5.2 框架的组成</h3><ul>
+<li><p>组成：一个框架由若干个<strong>槽</strong> 组成，每个槽划分为若干个<strong>侧面</strong>。由框架名、槽名、侧面、值组成</p>
+<ul>
+<li>槽：描述对象的一个方面属性</li>
+<li>侧面：描述相应属性的一个方面</li>
+</ul>
+</li>
+<li><p>一个框架结构：</p>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/2.5.2.png" alt="image" style="zoom:50%;"></p>
+</li>
+</ul>
+<h3 id="2-5-3-框架系统"><a href="#2-5-3-框架系统" class="headerlink" title="2.5.3 框架系统"></a>2.5.3 框架系统</h3><ol>
+<li><strong>特性继承</strong>：通过ISA 、AKO链来实现，系统沿ISA和AKO链追溯到具有相同槽的类或超类框架</li>
+<li><strong>匹配和填槽</strong>：框架的匹配实际上是通过对相应槽的槽名和槽值逐个进行比较，并利用继承关系来实现的。</li>
+</ol>
+<h3 id="2-5-5-框架表示法的特征"><a href="#2-5-5-框架表示法的特征" class="headerlink" title="2.5.5 框架表示法的特征"></a>2.5.5 框架表示法的特征</h3><ul>
+<li>主要优点<ul>
+<li><strong>结构性</strong>:最突出特点是善于表示结构性知识，它能够把知识的内部结构关系以及知识问的特殊联 系表示出来。</li>
+<li><strong>深层性:</strong>框架表示法不仅可以从多个方面、多重属性表示知识，而且还可以通过ISA 、AKO等槽以嵌套结构分层地对知识进行表示，因此能用来表达事物间复杂的深层联系。</li>
+<li><strong>继承性:</strong>在框架系统中，下层框架可以继承上层框架的槽值，也可以进行补充和修改，这样既减 少知识冗余，又较好地保证了知识的一致性。</li>
+<li><strong>自然性:</strong>框架能把与某个实体或实体集相关特性都集中在一起，从而高度模拟了人脑对实体多方面、多层次的存储结构，直观，自然，易于理解</li>
+</ul>
+</li>
+<li>主要缺点：<ul>
+<li><strong>缺乏框架的形式理论</strong>:至今，还没有建立框架的形式理论。</li>
+<li><strong>缺乏过程性知识表示</strong>:框架系统不使于表示过程性知识，缺乏如何使用框架中知识的描述能力。 框架推理过程需要用到一些与领域无关的推理规则，而这些规则在框架系统中又很难表达。</li>
+<li><strong>清晰性难以保证:</strong>由于各框架本身的数据结构不一定相同，从而框架系统的清晰性很难保证</li>
+</ul>
+</li>
+</ul>
+<h1 id="第三章-确定性推理"><a href="#第三章-确定性推理" class="headerlink" title="第三章 确定性推理"></a>第三章 确定性推理</h1><h2 id="3-1-概述"><a href="#3-1-概述" class="headerlink" title="3.1 概述"></a>3.1 概述</h2><h3 id="3-1-1-推理的基本概念"><a href="#3-1-1-推理的基本概念" class="headerlink" title="3.1.1 推理的基本概念"></a>3.1.1 推理的基本概念</h3><ul>
+<li><strong>推理</strong>：按照某种策略从已有事实和知识推出结论的过程<ul>
+<li>从<strong>结构</strong>的角度：推理由两个以上的判断所组成，把判断定义为对客观事物做出肯定或否 定的思维活动;认为判断是在概念的基础上进行的，所揭示的是概念之间联系和关系。</li>
+<li>从<strong>过程</strong>的角度：认为推理是在给定信息和已有知识的基础上的一系列加工操作，提出了如下人类推理的公式：$y=F(x,k)$, 其中$x$为推理时给出的信息，$k$为推理时可用的领域知识和特殊事例，$F$为可用的一系列操作，$y$为推理过程所得到的结论。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-2-推理的分类"><a href="#3-1-2-推理的分类" class="headerlink" title="3.1.2 推理的分类"></a>3.1.2 推理的分类</h3><h4 id="1-按推理的逻辑基础分类"><a href="#1-按推理的逻辑基础分类" class="headerlink" title="1. 按推理的逻辑基础分类"></a>1. 按推理的逻辑基础分类</h4><ul>
+<li><p><strong>演绎推理</strong>：从已知的一般性知识出发，推理出适合于某种个别情况的结论过程</p>
+<ul>
+<li><p>从<strong>一般到特别</strong>的推理，常用形式：三段论法（大前提、小前提、结论）</p>
+</li>
+<li><blockquote>
+<p>1 音乐系的学生至少会演奏一种乐器；（大前提）</p>
+<p>2 李聪是音乐系的一名学生；（小前提）</p>
+<p>3 李聪至少会演奏一种乐器。（结论）</p>
+</blockquote>
+</li>
+<li><p>不能增殖新知识。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>归纳推理</strong>：从大量特殊事例出发，归纳出一般性结论的推理过程</p>
+<ul>
+<li>从<strong>个别到一般</strong>的过程，是增殖新知识的过程。</li>
+<li>根据特殊事例考察范围：<ul>
+<li>完全推理</li>
+<li>不完全推理</li>
+</ul>
+</li>
+<li>根据推理使用方法：<ul>
+<li>枚举归纳推理</li>
+<li>类比归纳推理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><blockquote>
+<p>一位计算机维修员，从书本知识，到通过大量实例积累经验，是一种<strong>归纳推理</strong>方式。运用这些一般性知识 知识去维修计算机的过程则是<strong>演绎推理</strong></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-按所用知识的确定性分类"><a href="#2-按所用知识的确定性分类" class="headerlink" title="2. 按所用知识的确定性分类"></a>2. 按所用知识的确定性分类</h4><ul>
+<li><strong>确定性推理</strong>：推理时所有用的知识和证据都是确定的，推出的结论也是确定的，其真值或者为真或者为假， 没有第三种情况出现</li>
+<li><strong>不确定性推理</strong>：推理时所用的知识和证据不都是确定的，推出 的结论也不确定的</li>
+</ul>
+<h4 id="3-按推理中所用知识是否具有启发性分类"><a href="#3-按推理中所用知识是否具有启发性分类" class="headerlink" title="3. 按推理中所用知识是否具有启发性分类"></a>3. 按推理中所用知识是否具有启发性分类</h4><ul>
+<li><strong>启发式推理</strong>：推理过程中应用与问题有关的启发性知识，即解决问题的的策略、技巧及经验，以加快推理过程，提高搜索效率</li>
+<li><strong>非启发式推理</strong>：在推理过程中，不运用启发性知识，只按照一 般的控制逻辑进行推理。这种方法缺乏对求解问题的针对性，所以推理效率较低，容易出现 “组合爆炸”问题</li>
+</ul>
+<h3 id="3-1-3-推理的控制策略及其分类"><a href="#3-1-3-推理的控制策略及其分类" class="headerlink" title="3.1.3 推理的控制策略及其分类"></a>3.1.3 推理的控制策略及其分类</h3><p>推理过程不仅依赖于所用的推理方法，同时也依赖于推理的控制策略</p>
+<ul>
+<li><strong>推理的控制策略</strong>：如何使用领域知识使推理过程尽快达到目标的策略</li>
+<li><strong>控制策略的分类</strong> ：推理策略和搜索策略。<ul>
+<li>推理策略：<ul>
+<li>推理方向控制策略用于确定推理的控制方向，可分为正向推理、逆向推理、混合推理及双向推理。 </li>
+<li>求解策略是指仅求一个解，还是求所有解或最优解等。 </li>
+<li>限制策略是指对推理的深度、宽度、时间、空间等进行的限制。 </li>
+<li>冲突消解策略是指当推理过程有多条知识可用时，如何从这多条可用知识中选出一条最佳知识用 于推理的策略</li>
+</ul>
+</li>
+<li>搜索策略：主要解决推理线路、推理效果、推理效率等问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-产生式系统"><a href="#3-2-产生式系统" class="headerlink" title="3.2 产生式系统"></a>3.2 产生式系统</h2><h3 id="3-2-1-产生式系统的基本结构"><a href="#3-2-1-产生式系统的基本结构" class="headerlink" title="3.2.1 产生式系统的基本结构"></a>3.2.1 产生式系统的基本结构</h3><p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.2.1.png" alt="image" style="zoom:50%;"></p>
+<ul>
+<li><strong>综合数据库DB(Data Base)</strong><ul>
+<li>存放推理过程的各种当前信息，如问题的初始状态、输入的事实、中间结论及最终结论</li>
+<li>作为推理过程选择可用规则的依据。推理过程中某条规则是否可用，是通过该规则的前提与DB中的已知事实的匹配来确定的</li>
+</ul>
+</li>
+<li><strong>规则库RB(Rule Base)</strong>/知识库KB(Knowledge Base)：<ul>
+<li>作用：用于存放推理所需要的所有规则，是整个产生式系统的知识集。 是产生式系统能够进行推理的根本</li>
+<li>要求：知识的完整性、一致性、准确性、灵 活性和可组织性</li>
+</ul>
+</li>
+<li><strong>控制系统(Control system)</strong> <ul>
+<li>主要作用：用于控制整个产生式系统的运行，决定问题求解过程的推理线路</li>
+<li>主要任务：选择匹配、冲突消解、执行操作、终止推理、路径解释</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-2-产生式系统的推理过程"><a href="#3-2-2-产生式系统的推理过程" class="headerlink" title="3.2.2 产生式系统的推理过程"></a>3.2.2 产生式系统的推理过程</h3><h4 id="正向推理"><a href="#正向推理" class="headerlink" title="正向推理"></a>正向推理</h4><p>从已知事实出发、正向使用规则，亦称为数据驱动推理或前向链推理。</p>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.2.2-1.png" alt="image" style="zoom:50%;"></p>
+<blockquote>
+<p>假设知识库中包含有以下<strong>2</strong>条规则:   r1 :<strong>IF B THEN C</strong>    r2 :<strong>IF A THEN B</strong>     已知初始证据<strong>A</strong>，求证目标<strong>C</strong></p>
+</blockquote>
+<ul>
+<li>正向推理的特性:主要优点是<strong>比较直观</strong>，主要缺点是推理<strong>无明确的目标</strong>，求解问题时可能会执行许多与解无关的操作，导致<strong>推理效率较低</strong></li>
+</ul>
+<h4 id="逆向推理"><a href="#逆向推理" class="headerlink" title="逆向推理"></a>逆向推理</h4><p>某个假设目标出发，逆向使用规则，亦称为目标驱动推理或逆向链推理</p>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.2.2-2.png" alt="image" style="zoom:50%;"></p>
+<blockquote>
+<p>设有以下两条规则：r1: IF 动物有羽毛 THEN 动物是鸟，r2: IF 动物是鸟AND动物善飞 THEN动物是信天翁，假设已知有如下事实：动物有羽毛，动物善飞。求满足以上事实的动物是何种动物。</p>
+</blockquote>
+<ul>
+<li>逆向推理的特性: 逆向推理的主要优点是不必寻找和使用那些与假设目标无关的信息和规则，推理过程的<strong>目标明确</strong>，主要缺点是当用户对解的情况认识不清时，由系统自主选择假设 目标的<strong>盲目性</strong>比较大，若选择不好，会影响系统效率</li>
+<li><strong>双向推理法</strong></li>
+<li><strong>推理过程的不唯一性</strong> ：无论是正向推理还是逆向推理，当可用规则集中有 多条规则可用时，不同的冲突消解策略将导致不同的规则使用顺序， 因此其推理过 程是不唯一的。</li>
+</ul>
+<h2 id="3-3-自然演绎推理"><a href="#3-3-自然演绎推理" class="headerlink" title="3.3 自然演绎推理"></a>3.3 自然演绎推理</h2><h3 id="3-3-1-自然演绎推理的逻辑基础"><a href="#3-3-1-自然演绎推理的逻辑基础" class="headerlink" title="3.3.1 自然演绎推理的逻辑基础"></a>3.3.1 自然演绎推理的逻辑基础</h3><ul>
+<li><p><strong>定义1 谓词公式的解释</strong>：设D是谓词公式P的非空个体域，若 对P中的常量，函数和谓词按如下规定赋值</p>
+<ul>
+<li>为每个个体常量指派D中的一个元素</li>
+<li>为每个n元函数指派一个从$D^n$到D的一个映射,$D^n = {(x_1,x_2,\cdots,x_n)|x_1,x_2,\cdots,x_n\in D}$</li>
+<li>为每个n元谓词指派一个从$D^n$到{F,T}的映射，称这些指派为P在D上的一个解释</li>
+</ul>
+</li>
+<li><p><strong>定义2 谓词公式的永真性</strong></p>
+</li>
+<li><p><strong>定义3 谓词公式的可满足性</strong> ：对于谓词公式P，若至少存在D上一个解释使得P在此解释下的真值为T，则称P是可满足的</p>
+</li>
+<li><p><strong>定义4 谓词公式的永假性</strong></p>
+</li>
+<li><p><strong>定义5 谓词公式的等价性</strong> $P \Leftrightarrow Q$</p>
+<ul>
+<li>双重否定率；交换律；结合律；分配律；吸收率；补余率；</li>
+<li>摩根定律$\neg(P\vee Q)\Leftrightarrow \neg P\wedge \neg Q$；</li>
+<li>连词化归率$P\rightarrow Q\Leftrightarrow \neg P\vee Q$,  $P\leftrightarrow Q\Leftrightarrow (P\rightarrow Q)\wedge(Q\rightarrow P)$, $P\leftrightarrow Q\Leftrightarrow (P\wedge Q)\vee(\neg Q\wedge \neg P)$；</li>
+<li>量词转换率$\neg(\exists x)P\Leftrightarrow (\forall x)(\neg P)$, $\neg(\forall x)P\Leftrightarrow (\exist x)(\neg P)$</li>
+<li>量词分配率$(\forall x)(P\wedge Q)\Leftrightarrow (\forall x)P\wedge (\forall x)Q$, $(\exist x)(P\vee Q)\Leftrightarrow (\exist x)P\vee (\exist x)Q$</li>
+</ul>
+</li>
+<li><p><strong>定义6 永真蕴含式</strong>：$P\Rightarrow Q$</p>
+<ul>
+<li>化简式 $P\wedge Q\Rightarrow P, P\wedge Q\Rightarrow Q$</li>
+<li>附加式 $P\Rightarrow P\vee Q, Q\Rightarrow P\vee Q$</li>
+<li>析取三段论 $\neg P, P\vee Q\Rightarrow Q$</li>
+<li>假言推理 $P,P\rightarrow Q\Rightarrow Q$</li>
+<li>拒取式 $\neg Q, P\rightarrow Q\Rightarrow\neg P$</li>
+<li>假言三段论 $P\rightarrow Q, Q\rightarrow R\Rightarrow P\rightarrow R$</li>
+<li>二难推理 $P\vee Q, P\rightarrow R, Q\rightarrow R\Rightarrow R$</li>
+<li>全称固化 $(\forall x)P(x)\Rightarrow P(y)$， y是个体域中任一个体</li>
+<li>存在固化 $(\exist x)P(x)\Rightarrow P(y)$，y是个体域中某一个可以使P(y)为真的个体</li>
+</ul>
+</li>
+<li><p><strong>置换与合一</strong></p>
+<ul>
+<li><p>在不同谓词公式中，往往会出现谓词名相同但其个体不同的情况，此时推理 过程是不能直接进行匹配的，需要先进行置换。</p>
+</li>
+<li><blockquote>
+<p>$W(a)$和$W(x)\rightarrow Q(x)$中，谓词名虽然相同，但个体域不同，不能进行直接推理</p>
+</blockquote>
+</li>
+<li><p><strong>置换</strong></p>
+<ul>
+<li><p>${t_1/x_1, t_2/x_2, \cdots,t_n/x_n}$，其中$t_1,t_2,\cdots,t_n$是项，$x_1,x_2,\cdots,x_n$是互不相同的变元，$t_i/x_i$表示用$t_i$替换$x_i$。要求二者不能相同，$x_i$不能循环地出现在另一个$t_i$中</p>
+</li>
+<li><blockquote>
+<p>${a/x,c/y,f(b)/z}$是一个置换</p>
+<p>${g(z)/x,f(x)/z}$不是一个置换，循环置换现象</p>
+</blockquote>
+</li>
+<li><p><strong>定义8</strong> 设$\theta={t_1/x_1, t_2/x_2, \cdots,t_n/x_n}$是一个置换，$F$是一个谓词公式，把所有$x_i$换成$t_i(i=1,2,…,n)$，得到一个新的公式$G$，称$G$为$F$在置换$\theta$下的<strong>例示</strong>，记作$G=F\theta$</p>
+</li>
+<li><p><strong>置换的合成</strong> 设$\theta={t_1/x_1, t_2/x_2, L,t_n/x_n}, \lambda={u_1/y_1, u_2/y_2, L,u_n/y_n}$是两个置换，则将集合${t_1\lambda/x_1,t_2\lambda/x_2,L,t_n\lambda/x_n,u_1/y_1,u_2/y_2, L,u_n/y_n}$中符合条件(1)$t_i\lambda/x_i$，当$t_i\lambda=x_i$；(2)$u_i/y_i$当$y_i\in{x_1,x_2,\cdots,x_n}$；的元素删除，得到的集合仍然是个置换，该置换称为$\theta$与$\lambda$的合成，记作$\theta\cdot \lambda$</p>
+</li>
+</ul>
+</li>
+<li><p><strong>合一</strong> 寻找相对应变量的置换，使两个或多个谓词公式一致</p>
+<ul>
+<li><p><strong>定义9</strong> 设有公式集$F={F_1,F_2,\dots,F_n}$，若存在一个置换$\theta$，可使$F_1\theta=F_2\theta=\dots=F_n\theta$，则称$\theta$是$F$的一个合一。</p>
+</li>
+<li><blockquote>
+<p>对于公式集$F={P(x,y,f(y)),P(a,g(x),z)}$，则$\lambda={a/x,g(a)/y,f(g(a))/z}$是它的一个合一</p>
+</blockquote>
+</li>
+<li><p>一般情况下，一个公式集的合一不是唯一的</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-2-自然演绎推理方法"><a href="#3-3-2-自然演绎推理方法" class="headerlink" title="3.3.2 自然演绎推理方法"></a>3.3.2 自然演绎推理方法</h3><p>从一组已知为真的事实出发，直接运用命题 逻辑或谓词逻辑中的推理规则推出结论的过程</p>
+<p>最基本的推理规则有：</p>
+<ul>
+<li><p>假言三段论</p>
+<blockquote>
+<p>如果一个人大学毕业，则他就具有独立生活的能力</p>
+<p>如果一个人具有独立生活的能力，则他就可以离开父母</p>
+<p>$P\rightarrow Q, Q\rightarrow R\Rightarrow P\rightarrow R$</p>
+<p>$\Rightarrow$ 如果一个人大学毕业，则他就可以离开父母</p>
+</blockquote>
+</li>
+<li><p>假言推理</p>
+<blockquote>
+<p>如果S音乐系学生，则S至少会演奏一样乐器。 </p>
+<p>张艺是音乐系学生。</p>
+<p>$P,P\rightarrow Q\Rightarrow Q$</p>
+<p>$\Rightarrow$张艺至少会演奏一样乐器</p>
+</blockquote>
+</li>
+<li><p>拒取式</p>
+<blockquote>
+<p>如果S音乐系学生，则S至少会演奏一样乐器。 </p>
+<p>张艺不会演奏任何乐器</p>
+<p>$\neg Q, P\rightarrow Q\Rightarrow\neg P$</p>
+<p>$\Rightarrow$张艺不是音乐系学生。</p>
+</blockquote>
+</li>
+<li><p>T规则</p>
+</li>
+<li>P规则</li>
+</ul>
+<h2 id="3-4-归结演绎推理"><a href="#3-4-归结演绎推理" class="headerlink" title="3.4 归结演绎推理"></a>3.4 归结演绎推理</h2><p>“反证法”，要证明P→Q永真，只要能够证明P∧$\neg$Q是不可满足的就可以了(原因是$\neg$(P→Q) ⇔$\neg$($\neg$P∨Q) ⇔(P∧$\neg$Q)</p>
+<h3 id="3-4-1-谓词公式的范式"><a href="#3-4-1-谓词公式的范式" class="headerlink" title="3.4.1 谓词公式的范式"></a>3.4.1 谓词公式的范式</h3><p>范式是谓词公式的标准形式</p>
+<ul>
+<li><p><strong>前束范式</strong>：设F是一个谓词公式，如果其中的所有量词均非否定出现在公式的最前面，而它们的辖域为整个公式，则称F为前束范式。</p>
+<ul>
+<li><p>$(Q_1x_1)(Q_2x_2)\cdots(Q_nx_n)M(x_1,x_2,\cdots,x_n)$，其中$Q_i\in{\forall, \exist},(i=1,2,\cdots,n), M(x_1,x_2,\cdots,x_n)$中不含邮任何量词</p>
+</li>
+<li><blockquote>
+<p>$(\forall x)(\forall y)(\exist z)(P(x)\wedge Q(y,z)\vee R(x,z))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>Skolem标准型</strong>：从前束型范式中消去全部存在量词所得到的公式，并将谓词公式化为合取范式，这时所得的式子称为原公式的Skolem 标准型。</p>
+<ul>
+<li>$(\forall x_1)(\forall x_2)\cdots(\forall x_n)M(x_1,x_2,\cdots,x_n)$，其中$M(x_1,x_2,\cdots,x_n)$不含有任何量词，且为合取范式</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-2-子句集及其应用"><a href="#3-4-2-子句集及其应用" class="headerlink" title="3.4.2 子句集及其应用"></a>3.4.2 子句集及其应用</h3><h4 id="子句和子句集"><a href="#子句和子句集" class="headerlink" title="子句和子句集"></a>子句和子句集</h4><ul>
+<li><p><strong>文字</strong>：原子谓词公式及其否定 </p>
+<blockquote>
+<p>P(x), Q(x), $\neg$P(x)</p>
+</blockquote>
+</li>
+<li><p><strong>子句</strong>：任何文字的<strong>析取式</strong></p>
+<blockquote>
+<p>P(x)$\vee$Q(x)</p>
+</blockquote>
+</li>
+<li><p><strong>空子句</strong>: 不含任何文字的子句，<strong>NIL</strong> ，不能被任何解释满足，因此永假</p>
+</li>
+<li><p><strong>子句集</strong>：由子句或者空子句构成的集合</p>
+</li>
+</ul>
+<h4 id="子句集的化简"><a href="#子句集的化简" class="headerlink" title="子句集的化简"></a>子句集的化简</h4><blockquote>
+<p>$(\forall x)((\forall y)P(x,y)\rightarrow\neg(\forall y)(Q(x,y)\rightarrow R(x,y)))$</p>
+</blockquote>
+<ol>
+<li><p><strong>消去连接词$\rightarrow$和$\leftrightarrow$</strong></p>
+<ul>
+<li><p>反复使用$P\rightarrow Q\Leftrightarrow \neg P\vee Q$和$P\leftrightarrow Q\Leftrightarrow (P\wedge Q)\vee(\neg Q\wedge \neg P)$</p>
+</li>
+<li><blockquote>
+<p>$(\forall x)(\neg(\forall y)P(x,y)\vee\neg(\forall y)(\neg Q(x,y)\vee R(x,y)))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>减少否定符号的辖域</strong></p>
+<ul>
+<li><p>反复使用 双重否定率、摩根定律、量词转换率，将每个否定符号移到仅靠谓词的位置，最多只作用于一个谓词上</p>
+</li>
+<li><blockquote>
+<p>$(\forall x)((\exist y)\neg P(x,y)\vee(\exist y)( Q(x,y)\wedge \neg R(x,y)))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>对变元标准化</strong></p>
+<ul>
+<li><p>在一个量词的辖域内，把谓词公式中受该量词约束的变元全部用另外一个没有出现过的任意变元代替，使不同量词约束的变元有不同的名字</p>
+</li>
+<li><blockquote>
+<p>$(\forall x)((\exist y)\neg P(x,y)\vee(\exist z)( Q(x,z)\wedge \neg R(x,z)))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>化为前束范式</strong></p>
+<ul>
+<li><p>把所有量词都移到公式的左边，并且在移动时不能改变其相对顺序</p>
+</li>
+<li><blockquote>
+<p>$(\forall x)(\exist y)(\exist z)(\neg P(x,y)\vee( Q(x,z)\wedge \neg R(x,z)))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>消去存在量词</strong></p>
+<ul>
+<li><p>若存在量词不出现在全称量词的辖域内(即它的左边没有全称量词)，只要用一个新的个体常量替换受该存在量词约束的变元，就可消去该存在量词</p>
+</li>
+<li><p>若存在量词位于一个或多个全称量词的辖域内，需要用Skolem函数$f(x_1,x_2,\cdots,x_n)$替换受该存在量词约束的变元$y$，然后再消去该存在量</p>
+<p>词</p>
+<blockquote>
+<p>$(\forall x)(\neg P(x,f(x))\vee( Q(x,g(x))\wedge \neg R(x,g(x))))$ 用$f(x)$和$g(x)$替换$y$和$z$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>化为Skolem标准型</strong></p>
+<ul>
+<li><p>应用分配律，使得为合取式</p>
+</li>
+<li><blockquote>
+<p>$(\forall x)((\neg P(x,f(x))\vee Q(x,g(x)))\wedge (\neg P(x,f(x))\vee \neg R(x,g(x)))))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>消去全称量词</strong></p>
+<ul>
+<li><p>母式中的全部变元均受全称量词约束，并且与全称量词的次序无关， 因此可省掉全称量词</p>
+</li>
+<li><blockquote>
+<p>$(\neg P(x,f(x))\vee Q(x,g(x)))\wedge (\neg P(x,f(x))\vee \neg R(x,g(x))))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>消去合取词</strong></p>
+<ul>
+<li><p>在母式中消去所有合取词，把母式用子句集的形式表示出来。其中，子句集中的每一个元 素都是一个子句。</p>
+</li>
+<li><blockquote>
+<p>$\neg P(x,f(x))\vee Q(x,g(x))$</p>
+<p>$\neg P(x,f(x))\vee \neg R(x,g(x))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>更换变量名称</strong></p>
+<ul>
+<li><p>对子句集中的某些变量重新命名，使任意两个子句中不出现相同的变量名。由于任意两个 不同子句的变量之间实际上不存在任何关系。</p>
+</li>
+<li><blockquote>
+<p>$\neg P(x,f(x))\vee Q(x,g(x))$</p>
+<p>$\neg P(y,f(y))\vee \neg R(y,g(y))$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="子句集的应用"><a href="#子句集的应用" class="headerlink" title="子句集的应用"></a>子句集的应用</h4><ul>
+<li>由于子句集化简过程在消去存在量词时所用的Skolem函数可以不同，因此 所得到的标准子句集<strong>不唯一</strong></li>
+<li>当原谓词公式为可满足时，它与其标准子句集不一定等价；但当原谓词公式为不可满足时，其标准子句集则一定是不可满足的，即<strong>Skolem化并不影响原谓词公式的不可满足性</strong></li>
+<li><strong>定理3.1</strong> 设有谓词公式F，其标准子句集为S，则F为不可满足的充要条件是S为不可满足的。</li>
+</ul>
+<h3 id="3-4-3-鲁滨逊归结原理"><a href="#3-4-3-鲁滨逊归结原理" class="headerlink" title="3.4.3 鲁滨逊归结原理"></a>3.4.3 鲁滨逊归结原理</h3><h4 id="1-基本思想"><a href="#1-基本思想" class="headerlink" title="1. 基本思想"></a>1. 基本思想</h4><ul>
+<li><p>关键前提：</p>
+<ul>
+<li>子句集中的子句之间是合取关系。因此，子句集中只要有一个子句为不可满足，则整个子句集就是不可满足的</li>
+<li>空子句是不可满足的。因此，一个子句集中如果包含有空子句， 则此子句集就一定是不可满足的</li>
+</ul>
+</li>
+<li><p>基本思想：</p>
+<p>首先把欲证明问题的结论否定，并加入子句集，得到一个扩充的子句集<strong>S’</strong>。然后设 法检验子句集<strong>S’</strong>是否含有空子句，若含有空子句，则表明<strong>S’</strong>是不可满足的;若不含有空子句，则继续使用归结法，在子句集中选择合适的子句进行归结，直至导出空子句或不能继续归结为止</p>
+</li>
+</ul>
+<h4 id="2-命题逻辑的归结"><a href="#2-命题逻辑的归结" class="headerlink" title="2. 命题逻辑的归结"></a>2. 命题逻辑的归结</h4><ul>
+<li><p><strong>互补文字</strong>：若$P$是原子谓词公式，则称$P$与$\neg P$为互补文字</p>
+</li>
+<li><p><strong>归结</strong>：设$C_1$和$C_2$是子句集中的任意两个子句，如果$C_1$中的文字$L_1$与$C_2$中的文字$L_2$互补，那么可从这两个子句中消去这两个文字，将余下的部分按析取关系构成一个新的子句$C_{12}$，这一过程叫做<strong>归结</strong>，称$C_{12}$为$C_1$和$C_2$的<strong>归结式</strong>，称$C_1$和$C_2$为$C_{12}$的<strong>亲本子句</strong></p>
+<ul>
+<li><blockquote>
+<p>设$C_1$ =$\neg$P ∨Q ，$C_2$=$\neg$Q，$C_3$=P ，求$C_1$、$C_2$、$C_3$ 的归结式$C_{123}$</p>
+<p><img src="/2020/11/12/Artificial-Intelligence-Notes/Users/lixiang/blog/source/_posts/Artificial-Intelligence-Notes/3.4.3.png" alt="image" style="zoom:50%;"></p>
+</blockquote>
+</li>
+<li><p>归结树；归结过程不唯一</p>
+</li>
+</ul>
+</li>
+<li><p><strong>定理3.7</strong>：归结式$C_{12}$为其亲本子句$C_1$和$C_2$的逻辑结论</p>
+<ul>
+<li><strong>推论1</strong>：设$C_1$和$C_2$是子句集S中的两个子句，$C_{12}$为$C_1$和$C_2$的归结式，用$C_{12}$代替$C_1$和$C_2$得到新的子句集$S_1$，则$S_1$的不满足性$\Rightarrow$S的不满足性</li>
+<li><strong>推论2</strong>：把$C_{12}$加入S中得到新的子句集$S_2$，则$S_2$的不可满足性$\Leftrightarrow$S的不可满足性</li>
+</ul>
+</li>
+<li><p><strong>定理3.8</strong> ：子句集<strong>S</strong>是不可满足的，当且仅当存在一个从<strong>S</strong>到空子句的归结过程</p>
+</li>
+</ul>
+<h4 id="谓词逻辑的归结"><a href="#谓词逻辑的归结" class="headerlink" title="谓词逻辑的归结"></a>谓词逻辑的归结</h4><ul>
+<li><p><strong>定义25</strong>：设$C_1$和$C_2$是两个<strong>没有公共变元</strong>的子句，$L_1$与$L_2$分别是$C_1$和$C_2$中的文字，如果$L_1$与$L_2$存在合一$\sigma$，则称$C_{12}=({C_{1\sigma}}-{L_{1\sigma}})\cup({C_{2\sigma}}-{L_{2\sigma}})$为$C_1$和$C_2$的二元归结式</p>
+</li>
+<li><blockquote>
+<p>设$C_1=P(a)\vee R(x),C_2=\neg P(y)\vee Q(b)$，求$C_{12}$</p>
+</blockquote>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li><strong>不能同时消去两个互补对</strong></li>
+<li><strong>若子句内部有可以合一的文字，在归结之前应先进行合一</strong>，其中$C_{1\sigma}$为$C_1$的因子</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-4-归结演绎推理的方法"><a href="#3-4-4-归结演绎推理的方法" class="headerlink" title="3.4.4 归结演绎推理的方法"></a>3.4.4 归结演绎推理的方法</h3><h4 id="命题逻辑的归结反演"><a href="#命题逻辑的归结反演" class="headerlink" title="命题逻辑的归结反演"></a>命题逻辑的归结反演</h4><ul>
+<li><strong>归结原理</strong>：假设F为已知前提，G为欲证明的结论，归结原理把证明G为F的逻辑结论转化为证明$F\wedge\neg G$为不可满足。再把公式集上的不可满足转化为子句集上的不可满足。</li>
+<li><strong>归结反演</strong>：应用归结原理证明定理的过程称为归结反演</li>
+<li>在命题逻辑中，已知<strong>F</strong>，证明<strong>G</strong>为真的归结反演过程如下<ol>
+<li>否定目标公式<strong>G</strong>，得$\neg G$</li>
+<li>把$\neg G$并入到公式集F中，得到{F，$\neg G$}</li>
+<li>把{F，$\neg G$}化为子句集</li>
+<li>应用归结原理对子句集<strong>S</strong>中的子句进行归结，并把每次得到的归结式并入<strong>S</strong>中。如此反复进行，若出现空子句，则停止归结，此时就证明了<strong>G</strong>为真</li>
+</ol>
+</li>
+</ul>
+<h4 id="谓词逻辑的归结演绎推理"><a href="#谓词逻辑的归结演绎推理" class="headerlink" title="谓词逻辑的归结演绎推理"></a>谓词逻辑的归结演绎推理</h4><p>谓词逻辑的归结反演过程与命题逻辑的归结反演过程相比，其步骤基本相同， 但每步的处理对象不同。例如，在步骤<strong>(3)</strong>化简子句集时，谓词逻辑需要把由谓 词构成的公式集化为子句集;在步骤<strong>(4)</strong>按归结原理进行归结时，谓词逻辑的归 结原理需要考虑两个亲本子句的合一。</p>
+<h3 id="3-4-5-归结演绎推理的归结策略"><a href="#3-4-5-归结演绎推理的归结策略" class="headerlink" title="3.4.5 归结演绎推理的归结策略"></a>3.4.5 归结演绎推理的归结策略</h3><p>归结策略是指在归结演绎推理过程的每一步如何选择进行归结的子句对， 以尽快得到空子句的策略，不同的归结策略影响归结过程、归结推理效率和完备性。</p>
+<h4 id="排序策略（广度优先策略）"><a href="#排序策略（广度优先策略）" class="headerlink" title="排序策略（广度优先策略）"></a>排序策略（广度优先策略）</h4><p>设初始子句集为$S_0$</p>
+<ol>
+<li>从$S_0$出发，对$S_0$ 中的全部子句作所有可能的归结，得到第一层归结式，把 这些归结式的集合记为$S_1$</li>
+<li>用$S_0$ , $S_1$中的子句与$S_1$中的子句进行所有可能的归结，得到第二层归结式， 把这些归结式的集合记为$S_2$</li>
+<li>用$S_0$ , $S_1$, $S_2$中的子句与$S_2$中的子句进行所有可能的归结，得到第三层归结式， 把这些归结式的集合记为$S_3$</li>
+<li>如此继续，直到得出空子句或不能再继续归结为止</li>
+</ol>
+<ul>
+<li>归结效率较低，当问题比较复杂时，还可能会出现组合爆炸</li>
+<li>广度优先策略是完备的，并当问题有解时，它一定能找到最短归结路径</li>
+<li>适合问题较小情况</li>
+</ul>
+<h4 id="删除策略"><a href="#删除策略" class="headerlink" title="删除策略"></a>删除策略</h4><p>归结过程在寻找可归结子句时，子句集中的子句越多，需要付出的代价就会越大。如果在归结时能把子句集中无用的子句删除掉，这就会缩小搜索 范围，减少比较次数，从而提高归结效率</p>
+<ul>
+<li><p>纯文字删除策略</p>
+<ul>
+<li>如果某文字$L$在子句集中不存在可与其互补的文字$\neg L$，则称该文字为<strong>纯文字</strong>.</li>
+<li>在归结过程中，纯文字不可能被消除，用包含纯文字的子句进行归结也不可能得到空子句，因此对包含纯文字的子句进行归结是没有意义的，应该把它从子句 集中删除。</li>
+</ul>
+</li>
+<li><p>重言式删除策略</p>
+<ul>
+<li>如果一个子句中包含有互补的文字对，则称其为重言式</li>
+<li>重言式是真值为真的子句。对一个子句集来说，不管是增加还是删除一个真值 为真的子句，都不会影响该子句集的不可满足性。因此，可删去</li>
+</ul>
+</li>
+<li><p>包孕删除策略</p>
+<ul>
+<li><p>设有子句C1 和C2 ，如果存在一个置换σ，使得C1 σ⊆C2 ，则称C1包孕于 C2</p>
+</li>
+<li><blockquote>
+<p>P(x) 包孕于 P(a)∨Q(z) , σ={a/x}</p>
+<p>P(x) ∨Q(a) 包孕于P(f(a))∨Q(a)∨R(y) σ={f(a)/x}</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="限制策略"><a href="#限制策略" class="headerlink" title="限制策略"></a>限制策略</h4><ul>
+<li>支持集策略<ul>
+<li>要求每一次参加归结的两个亲本子句中，至少应该有一个是由目标公式的否定所得到的子句或它们的后裔</li>
+<li>这种策略限制了子句集元素的剧增，但却增加了空子句的深度</li>
+</ul>
+</li>
+<li>线性输入策略<ul>
+<li>要求每次参加归结的两个亲本子句中，至少应该有一个是初始子句集中的子句</li>
+<li>可限制生成归结式的数目，简单高效，但是一种不完备策略</li>
+</ul>
+</li>
+<li>祖先过滤策略<ul>
+<li>每次参加归结的两个亲本子句，只要满足以下两个条件中的任意一 个就可进行归结: (1)两个亲本子句中至少有一个是初始子句集中的子句。(2)如果两个亲本子句都不是初始子句集中的子句，则一个子句应该是另一个 子句的先辈子句</li>
+<li>祖先过滤策略也是完备的</li>
+</ul>
+</li>
+<li>单文字子句策略<ul>
+<li>单文字：如果一个子句只包含一个文字，则称此子句为单文字子句。</li>
+<li>基本思想：要求每次参加归结的两个亲本子句中至少有一个子句是单文字子句</li>
+<li>单文字子句策略是不完备的</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-6-用归结反演求取问题的答案"><a href="#3-4-6-用归结反演求取问题的答案" class="headerlink" title="3.4.6 用归结反演求取问题的答案"></a>3.4.6 用归结反演求取问题的答案</h3><p>步骤：</p>
+<ol>
+<li>把已知条件用谓词公式表示，并化成相应的子句集S1</li>
+<li>把待求解的问题也用谓词公式表示，然后将其否定，并与谓词ANSWER构成析取式G1</li>
+<li>把G1化为子句集S2，并把子句集S1与S2合并构成新子句集S</li>
+<li>对子句集S应用谓词归结原理进行归结，在归结过程中通过合一置换， 改变ANSWER中的变元</li>
+<li>如果得到归结式ANSWER，则问题的答案就在ANSWER谓词中</li>
+</ol>
+<h1 id="第四章-搜索策略"><a href="#第四章-搜索策略" class="headerlink" title="第四章 搜索策略"></a>第四章 搜索策略</h1><h2 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1 概述"></a>4.1 概述</h2><p>依靠经验，利用已有知识，根据问题的实际情况，不断寻找可利用知识， 从而构造一条代价最小的推理路线，使问题得以解决的过程称为搜索。</p>
+<h3 id="4-1-2-问题的概述"><a href="#4-1-2-问题的概述" class="headerlink" title="4.1.2 问题的概述"></a>4.1.2 问题的概述</h3><p>问题可形式化定义为三个组成部分</p>
+<ol>
+<li>初始状态(Initial state) （$s_0$）</li>
+<li>后继函数<ul>
+<li>操作函数(Actions): {$a_1, a_2, a_3,…..$}</li>
+<li>路径耗散函数(PathCost)：</li>
+</ul>
+</li>
+<li>目标测试函数(GoalTest)</li>
+</ol>
+<p>问题的解：初始状态到目标状态操作的序列</p>
+<h3 id="4-1-3-状态空间法"><a href="#4-1-3-状态空间法" class="headerlink" title="4.1.3 状态空间法"></a>4.1.3 状态空间法</h3><ul>
+<li><strong>状态</strong>：表示问题求解过程中每一步问题状况的数据结构</li>
+<li>*<em>操作</em></li>
+</ul>
+<h2 id="4-2-状态空间盲目搜索"><a href="#4-2-状态空间盲目搜索" class="headerlink" title="4.2 状态空间盲目搜索"></a>4.2 状态空间盲目搜索</h2><ul>
+<li>Open表：用于存放刚生成的节点,未扩展的节点，Open表称为未扩展的节点表</li>
+<li>Closed表：用于存放已经扩展或将要扩展的节点，Closed称为已扩展的节点表</li>
+<li>$S_0$：表示问题的初始状态</li>
+<li>$S_g$：表示问题的目标状态</li>
+</ul>
+<h3 id="4-2-1-一般图搜索过程"><a href="#4-2-1-一般图搜索过程" class="headerlink" title="4.2.1 一般图搜索过程"></a>4.2.1 一般图搜索过程</h3><ol>
+<li>把初始节点<strong>S0</strong>放入<strong>Open</strong>表，并建立目前仅包<strong>S0</strong>的图<strong>G</strong>，建立一个<strong>Closed</strong>表， 置为空;</li>
+<li>检查<strong>Open</strong>表是否为空表，若为空，则问题无解，失败退出</li>
+<li>把<strong>Open</strong>表的第一个节点取出放入<strong>Closed</strong>表，并记该节点为<strong>n </strong></li>
+<li>考察节点<strong>n</strong>是否为目标节点，若是则得到问题的解成功退出。</li>
+<li>扩展节点<strong>n </strong>，生成一组子节点。把这些子节点中不是其父节点的那部分子节点计入集合<strong>M</strong>，并把这些子节点作为节点<strong>n</strong>的子节点加<strong>G</strong>中。</li>
+<li>针对M中子节点的不同情况，分别作如下处理:<ol>
+<li>对那些没有在G中出现过的M成员设置一个指向其父节点(即节点n)的指针，并将他它放入Open表。</li>
+<li>对那些原来已经在G中出现过，但没有被扩展过的M成员，确定是否需要修改它指向父节点的指针</li>
+<li>对那些原来已经在G中出现过，并已经被扩展过的M成员，确定是否需要修改其后继节点指向父节点的指针</li>
+</ol>
+</li>
+<li>按某种策略对Open表中的节点进行排序</li>
+<li>转第2步</li>
+</ol>
+<h3 id="4-2-2-广度优先搜索"><a href="#4-2-2-广度优先搜索" class="headerlink" title="4.2.2 广度优先搜索"></a>4.2.2 广度优先搜索</h3><p>OPEN表中的节点总是按进入的先后顺序排列，先进入的节点排在前面，后 进入的排在后面</p>
+<ol>
+<li>把初始节点S0放入Open表,建立个CLOSED表，置为空; </li>
+<li>检查Open表是否为空表，若为空，则问题无解，失败退出</li>
+<li>把Open表的第一个节点取出放入Closed表，并记该节点为n</li>
+<li>考察节点n是否为目标节点，若是则得到问题的解成功退出</li>
+<li>若节点n不可扩展，则转第(2)步;</li>
+<li>扩展节点n， 将其子节点放入Open表的<strong>尾部</strong>，并为每个子节点设置指向父节 点的指针,转向第(2)步。</li>
+</ol>
+<ul>
+<li><p>性质：</p>
+<ul>
+<li>当问题有解时，一定能找到解</li>
+<li>搜素效率低</li>
+<li>方法与问题无关，具有通用性</li>
+<li>搜索中得到的解是搜索树中路径最短的解（最优解）</li>
+<li>属于<strong>完备</strong>搜索策略</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-2-3-深度优先搜索"><a href="#4-2-3-深度优先搜索" class="headerlink" title="4.2.3 深度优先搜索"></a>4.2.3 深度优先搜索</h4><p>Open表是一种栈结构，最先进进入的节点排在最后面，最后进入的节点排最前面</p>
+<ol>
+<li>把初始节点S0放入Open表,建立个CLOSED表，置为空; </li>
+<li>检查Open表是否为空表，若为空，则问题无解，失败退出</li>
+<li>把Open表的第一个节点取出放入Closed表，并记该节点为n</li>
+<li>考察节点n是否为目标节点，若是则得到问题的解成功退出</li>
+<li>若节点n不可扩展，则转第(2)步</li>
+<li>扩展节点n， 将其子节点放入Open表的<strong>首部</strong>，并为每个子节点设置指向父节 点的指针, 转向第(2)步。</li>
+</ol>
+<ul>
+<li>性质<ul>
+<li>一般不能保证找到最优解</li>
+<li>最坏情况时，搜索空间等同于穷举</li>
+<li>是一个通用的与问题无关的方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-4-代价一致搜索-UCS"><a href="#4-2-4-代价一致搜索-UCS" class="headerlink" title="4.2.4 代价一致搜索(UCS)"></a>4.2.4 代价一致搜索(UCS)</h3><p>在搜索树中给每条边标上其代价。这种边上有代价的树称为代价树。可以用g(n)表示从初始节点S0到节点n的代价，用c(n1, n2)表 示从父节点n1到n2的代价。对节点n2的代价有g(n2) = g(n1) + c(n1, n2)。在代价树中，<strong>最小代价的路径和最短路径是有可能不同的</strong>，最短路径不一 定是最小代价径，最小代价路径也不一定是路径最短。代价树搜索的目的是为了到最佳解，即找到一条代价最小的解路径。</p>
+<ul>
+<li><p>基本思想：把从起 始节点S0到任一节点i的路径代价记为g(i)。从初始节点S0开始扩展， 若没有得到目标节点，则优先扩展最少代价g(i)的节点，一直如此 向下搜索。</p>
+</li>
+<li><p>过程：</p>
+<ol>
+<li><p>把初始节点S0放入Open表，设g(s0)=0, 建立一个CLOSED表，置为空</p>
+</li>
+<li><p>检查Open表是否为空表，若为空，则问题无解，失败退出</p>
+</li>
+<li><p>把Open表的第一个节点取出放入Closed表，并记该节点为n</p>
+</li>
+<li><p>考察节点n是否为目标节点，若是则得到问题的解成功退出</p>
+</li>
+<li><p>若节点n不可扩展，则转第(2)步</p>
+</li>
+<li><p>扩展节点n， 生成子节点ni(i=1,2,……)，将其子节点放入Open表，并为每个子节点设置指向父节点的指针，计算各个节点的代价g(ni) ，将Open表内的节点按g(ni)从小到大排序, 转向第2步。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-3-状态空间启发式搜索"><a href="#4-3-状态空间启发式搜索" class="headerlink" title="4.3 状态空间启发式搜索"></a>4.3 状态空间启发式搜索</h2><h3 id="4-3-1-启发性信息"><a href="#4-3-1-启发性信息" class="headerlink" title="4.3.1 启发性信息"></a>4.3.1 启发性信息</h3><ul>
+<li>启发性信息：<ul>
+<li>启发性信息是指那种与具体问题求解过程有关的，并可指导搜索过程 朝着最有希望方向前进的控制信息</li>
+<li>启发信息的启发能力越强，扩展的无用结点越少，搜索算法越高效</li>
+<li>包括3种：<ul>
+<li>有效地帮助确定扩展节点的信息</li>
+<li>有效地帮助决定哪些后继节点应被生成的信息</li>
+<li>能决定在扩展一个节点时哪些节点应从搜索树上删除的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>估价函数</strong>：$f(n)=g(n)+h(n)$<ul>
+<li>g(n)是从初始节点到节点n的实际代价，h(n)是从节点n到目标节点的最优路径的估计代价</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-2-贪心算法"><a href="#4-3-2-贪心算法" class="headerlink" title="4.3.2 贪心算法"></a>4.3.2 贪心算法</h3><p><strong>forward cost</strong> h(n)</p>
+<h3 id="4-3-3-A算法"><a href="#4-3-3-A算法" class="headerlink" title="4.3.3 A算法"></a>4.3.3 A算法</h3><ul>
+<li>概念：每一步都利用估价函数<strong>f(n)=g(n)+h(n)</strong>对<strong>Open</strong>表中的节点进行排序，则 称<strong>A</strong>算法。它是一种为启发式搜索算法</li>
+<li>类型：<ul>
+<li>全局择优：从<strong>Open</strong>表的所有节点中选择一个估价函数值最小的进行扩展</li>
+<li>局部择优：仅从刚生成的子节点中选择一个估价函数值最小的进行扩展</li>
+</ul>
+</li>
+<li>算法描述<ol>
+<li>把初始节点S0放入<strong>Open</strong>表中f(S0)=g(S0)+h(S0)</li>
+<li>如果<strong>Open</strong>表为空，则问题无解，失败退出</li>
+<li>把<strong>Open</strong>表的第一个节点取出放入<strong>Closed</strong>表，并记该节点为<strong>n</strong></li>
+<li>考察节点<strong>n</strong>是否为目标节点。若是，则找到了问题的解，成功退出</li>
+<li>若节点<strong>n</strong>不可扩展，则转第<strong>(2)</strong>步;</li>
+<li>扩展节点<strong>n</strong>，生成其子节点ni(i=1, 2, …)，计算每一个子节点的估价值f(ni )(i=1, 2, …)，并为每一个子节点设置指向父节点的指针，然后将这些子节点放入<strong>Open</strong>表中;</li>
+<li>根据各节点的估价函数值，对<strong>Open</strong>表中的全部节点按从小到大的顺序重新进行排序</li>
+<li>转第<strong>(2)</strong>步。</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-3-4-A-算法"><a href="#4-3-4-A-算法" class="headerlink" title="4.3.4 A*算法"></a>4.3.4 A*算法</h3><p>假设f*(n)是从初始节点S0出发，约束经过节点<strong>n</strong>到达目标节点Sg的最小代价，估价函数f(n)是对f*(n)的估计值。f*(n)=g*(n)+h*(n)。其中，<strong>g*(n)</strong>是从S0出发到达Sg的最小代价<strong>,h*(n)</strong>是<strong>n</strong> 到Sg的最小代价</p>
+<ul>
+<li>定义4.1 如果对<strong>A</strong>算法(全局择优)中的<strong>g(n)</strong>和<strong>h(n)</strong>分别提出如下限制，则称满足下述两条限制的A算法为A*算法<ul>
+<li><strong>g(n)</strong>是对最小代价<strong>g*(n)</strong>的估计，且<strong>g(n)&gt;0</strong>;</li>
+<li><strong>h(n)</strong>是最小代价<strong>h*(n)</strong>的下界，即对任意节点<strong>n</strong>均有<strong>h(n)</strong>≤<strong>h*(n)</strong>。</li>
+</ul>
+</li>
+<li>可纳性：对任一状态空间图，当从初始节点到目标节点有路经存在时，如果搜索 算法总能在有限步骤内找到一条从初始节点到目标节点的最佳路径， 并在此路径 上结束，则称该搜索算法是可采纳的</li>
+<li><strong>单调限制</strong>：如果启发函数满足以下两个条件，称h(n)满足单调限制:<ul>
+<li>h(Sg)=0;</li>
+<li>对任意节点ni及其任一子节点nj，都有$0\leq h(n_i)-h(n_j)\leq c(n_i,n_j)$，其中$ c(n_i,n_j)$是$n_i$到其子节点$n_j$的边代价</li>
+</ul>
+</li>
+<li>定理4.5  如果<strong>h</strong>满足单调条件，则当<strong>A*</strong>算法扩展节点<strong>n</strong>时，该节点就已经找到了通 往它的最佳路径，即<strong>g(n)=g*(n)</strong>。</li>
+<li>定理4.6 如果<strong>h(n)</strong>满足单调限制，则<strong>A*</strong>算法扩展的节点序列的<strong>f</strong> 值是非递减的，即 f(ni <strong>)</strong>≤f(ni+1)。</li>
+</ul>
+<h2 id="4-4-与-或树搜索"><a href="#4-4-与-或树搜索" class="headerlink" title="4.4 与/或树搜索"></a>4.4 与/或树搜索</h2><h2 id="4-5-博弈树的启发式搜索"><a href="#4-5-博弈树的启发式搜索" class="headerlink" title="4.5 博弈树的启发式搜索"></a>4.5 博弈树的启发式搜索</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/03/Group-Pre-Zero-Shot-Stance-Detection/" rel="next" title="[Group Pre] Zero-Shot Stance Detection">
+                <i class="fa fa-chevron-left"></i> [Group Pre] Zero-Shot Stance Detection
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/25/Group-Pre-Learning-to-Few-Shot-Learn-Across-Diverse-Natural-Language-Classification-Tasks/" rel="prev" title="[Group Pre] Learning to Few-Shot Learn Across Diverse Natural Language Classification Tasks">
+                [Group Pre] Learning to Few-Shot Learn Across Diverse Natural Language Classification Tasks <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Xiang Li">
+            
+              <p class="site-author-name" itemprop="name">Xiang Li</p>
+              <p class="site-description motion-element" itemprop="description">An Undergraduate in Harbin Institute of Technology, Shenzhen</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/South7X" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiangli@stu.hit.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/li-xiang-46-28-15" target="_blank" title="Zhihu(知乎)">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Zhihu(知乎)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=0OwAye3OV9SO9n8OleAhZ-40dQuWWKi0F6UXV89B5tU"></script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-知识表示"><span class="nav-number">1.</span> <span class="nav-text">第二章 知识表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-知识与知识表示基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 知识与知识表示基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-知识的含义和结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1.1 知识的含义和结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-知识的种类与特性"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.1.2 知识的种类与特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4-知识表示"><span class="nav-number">1.1.3.</span> <span class="nav-text">2.1.4 知识表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-一阶谓词逻辑表示法"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 一阶谓词逻辑表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-谓词、函数、量词"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.2.1 谓词、函数、量词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-谓词公式"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2.2 谓词公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5-谓词逻辑表示法的特点"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.2.5 谓词逻辑表示法的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-产生式表示法"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 产生式表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-知识的产生式表示方法"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.3.1 知识的产生式表示方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-5-产生式系统的特点"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.3.5 产生式系统的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-语义网络表示法"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 语义网络表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-概述"><span class="nav-number">1.4.1.</span> <span class="nav-text">2.4.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-基本语义关系"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.4.2 基本语义关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-事物和概念的表示"><span class="nav-number">1.4.3.</span> <span class="nav-text">2.4.3 事物和概念的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-4-情况和动作的表示"><span class="nav-number">1.4.4.</span> <span class="nav-text">2.4.4 情况和动作的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-情况的表示"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">1. 情况的表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-事件和动作的表示"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">2. 事件和动作的表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-5-基于语义网络的推理"><span class="nav-number">1.4.5.</span> <span class="nav-text">2.4.5 基于语义网络的推理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-6-语义网络表示法的特点"><span class="nav-number">1.4.6.</span> <span class="nav-text">2.4.6 语义网络表示法的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-框架表示法"><span class="nav-number">1.5.</span> <span class="nav-text">2.5 框架表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-框架表示法概述"><span class="nav-number">1.5.1.</span> <span class="nav-text">2.5.1 框架表示法概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-框架的组成"><span class="nav-number">1.5.2.</span> <span class="nav-text">2.5.2 框架的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-3-框架系统"><span class="nav-number">1.5.3.</span> <span class="nav-text">2.5.3 框架系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-5-框架表示法的特征"><span class="nav-number">1.5.4.</span> <span class="nav-text">2.5.5 框架表示法的特征</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-确定性推理"><span class="nav-number">2.</span> <span class="nav-text">第三章 确定性推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-概述"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-推理的基本概念"><span class="nav-number">2.1.1.</span> <span class="nav-text">3.1.1 推理的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-推理的分类"><span class="nav-number">2.1.2.</span> <span class="nav-text">3.1.2 推理的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-按推理的逻辑基础分类"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">1. 按推理的逻辑基础分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-按所用知识的确定性分类"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">2. 按所用知识的确定性分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-按推理中所用知识是否具有启发性分类"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">3. 按推理中所用知识是否具有启发性分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-推理的控制策略及其分类"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.1.3 推理的控制策略及其分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-产生式系统"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 产生式系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-产生式系统的基本结构"><span class="nav-number">2.2.1.</span> <span class="nav-text">3.2.1 产生式系统的基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-产生式系统的推理过程"><span class="nav-number">2.2.2.</span> <span class="nav-text">3.2.2 产生式系统的推理过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#正向推理"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">正向推理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逆向推理"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">逆向推理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-自然演绎推理"><span class="nav-number">2.3.</span> <span class="nav-text">3.3 自然演绎推理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-自然演绎推理的逻辑基础"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.3.1 自然演绎推理的逻辑基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-自然演绎推理方法"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.3.2 自然演绎推理方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-归结演绎推理"><span class="nav-number">2.4.</span> <span class="nav-text">3.4 归结演绎推理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-谓词公式的范式"><span class="nav-number">2.4.1.</span> <span class="nav-text">3.4.1 谓词公式的范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-子句集及其应用"><span class="nav-number">2.4.2.</span> <span class="nav-text">3.4.2 子句集及其应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子句和子句集"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">子句和子句集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子句集的化简"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">子句集的化简</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子句集的应用"><span class="nav-number">2.4.2.3.</span> <span class="nav-text">子句集的应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-鲁滨逊归结原理"><span class="nav-number">2.4.3.</span> <span class="nav-text">3.4.3 鲁滨逊归结原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本思想"><span class="nav-number">2.4.3.1.</span> <span class="nav-text">1. 基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-命题逻辑的归结"><span class="nav-number">2.4.3.2.</span> <span class="nav-text">2. 命题逻辑的归结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谓词逻辑的归结"><span class="nav-number">2.4.3.3.</span> <span class="nav-text">谓词逻辑的归结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-4-归结演绎推理的方法"><span class="nav-number">2.4.4.</span> <span class="nav-text">3.4.4 归结演绎推理的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命题逻辑的归结反演"><span class="nav-number">2.4.4.1.</span> <span class="nav-text">命题逻辑的归结反演</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谓词逻辑的归结演绎推理"><span class="nav-number">2.4.4.2.</span> <span class="nav-text">谓词逻辑的归结演绎推理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-5-归结演绎推理的归结策略"><span class="nav-number">2.4.5.</span> <span class="nav-text">3.4.5 归结演绎推理的归结策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序策略（广度优先策略）"><span class="nav-number">2.4.5.1.</span> <span class="nav-text">排序策略（广度优先策略）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除策略"><span class="nav-number">2.4.5.2.</span> <span class="nav-text">删除策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限制策略"><span class="nav-number">2.4.5.3.</span> <span class="nav-text">限制策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-6-用归结反演求取问题的答案"><span class="nav-number">2.4.6.</span> <span class="nav-text">3.4.6 用归结反演求取问题的答案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-搜索策略"><span class="nav-number">3.</span> <span class="nav-text">第四章 搜索策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-概述"><span class="nav-number">3.1.</span> <span class="nav-text">4.1 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-问题的概述"><span class="nav-number">3.1.1.</span> <span class="nav-text">4.1.2 问题的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-状态空间法"><span class="nav-number">3.1.2.</span> <span class="nav-text">4.1.3 状态空间法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-状态空间盲目搜索"><span class="nav-number">3.2.</span> <span class="nav-text">4.2 状态空间盲目搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-一般图搜索过程"><span class="nav-number">3.2.1.</span> <span class="nav-text">4.2.1 一般图搜索过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-广度优先搜索"><span class="nav-number">3.2.2.</span> <span class="nav-text">4.2.2 广度优先搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3-深度优先搜索"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">4.2.3 深度优先搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-代价一致搜索-UCS"><span class="nav-number">3.2.3.</span> <span class="nav-text">4.2.4 代价一致搜索(UCS)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-状态空间启发式搜索"><span class="nav-number">3.3.</span> <span class="nav-text">4.3 状态空间启发式搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-启发性信息"><span class="nav-number">3.3.1.</span> <span class="nav-text">4.3.1 启发性信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-贪心算法"><span class="nav-number">3.3.2.</span> <span class="nav-text">4.3.2 贪心算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-A算法"><span class="nav-number">3.3.3.</span> <span class="nav-text">4.3.3 A算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-A-算法"><span class="nav-number">3.3.4.</span> <span class="nav-text">4.3.4 A*算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-与-或树搜索"><span class="nav-number">3.4.</span> <span class="nav-text">4.4 与/或树搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-博弈树的启发式搜索"><span class="nav-number">3.5.</span> <span class="nav-text">4.5 博弈树的启发式搜索</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

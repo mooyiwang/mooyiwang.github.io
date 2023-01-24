@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NLP,Fact Verification,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这次的paper是关于Fact Extraction and Verification的，跟之前在做的Stance Detection有点类似吧，二者好像都在Fake news这个大任务里。前两篇论文笔记介绍了Stance Detection的几篇paper，这篇论文笔记我们来简单谈一谈Fact Extraction and Verification（事实抽取和证实）。由于我也是刚接触这个任务，所">
+<meta name="keywords" content="NLP,Fact Verification">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Reading Notes] Fact Extraction &amp; Verification (1)">
+<meta property="og:url" content="http://yoursite.com/2021/06/17/Reading-Notes-Fact-Extraction-Verification-1/index.html">
+<meta property="og:site_name" content="Xiang Li">
+<meta property="og:description" content="这次的paper是关于Fact Extraction and Verification的，跟之前在做的Stance Detection有点类似吧，二者好像都在Fake news这个大任务里。前两篇论文笔记介绍了Stance Detection的几篇paper，这篇论文笔记我们来简单谈一谈Fact Extraction and Verification（事实抽取和证实）。由于我也是刚接触这个任务，所">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-053c8c1f9d6168de4d92c0ed0663a954_b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-c8a99f3e573c7dbe2e48b7d67ade7543_b.png">
+<meta property="og:updated_time" content="2021-09-01T09:02:43.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Reading Notes] Fact Extraction &amp; Verification (1)">
+<meta name="twitter:description" content="这次的paper是关于Fact Extraction and Verification的，跟之前在做的Stance Detection有点类似吧，二者好像都在Fake news这个大任务里。前两篇论文笔记介绍了Stance Detection的几篇paper，这篇论文笔记我们来简单谈一谈Fact Extraction and Verification（事实抽取和证实）。由于我也是刚接触这个任务，所">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-053c8c1f9d6168de4d92c0ed0663a954_b.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/06/17/Reading-Notes-Fact-Extraction-Verification-1/">
+
+
+
+
+
+  <title>[Reading Notes] Fact Extraction & Verification (1) | Xiang Li</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiang Li</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Harbin Institute of Technology, Shenzhen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/17/Reading-Notes-Fact-Extraction-Verification-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiang Li">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiang Li">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Reading Notes] Fact Extraction & Verification (1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-17T21:13:15+08:00">
+                2021-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading Notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这次的paper是关于Fact Extraction and Verification的，跟之前在做的Stance Detection有点类似吧，二者好像都在Fake news这个大任务里。前两篇论文笔记介绍了Stance Detection的几篇paper，这篇论文笔记我们来简单谈一谈Fact Extraction and Verification（事实抽取和证实）。由于我也是刚接触这个任务，所以有错误的地方还望指正。</p>
+<h1 id="NAACL’18-FEVER-a-large-scale-dataset-for-Fact-Extraction-and-VERification"><a href="#NAACL’18-FEVER-a-large-scale-dataset-for-Fact-Extraction-and-VERification" class="headerlink" title="[NAACL’18] FEVER: a large-scale dataset for Fact Extraction and VERification"></a><strong>[NAACL’18] FEVER: a large-scale dataset for Fact Extraction and VERification</strong></h1><p>这篇论文主要是提出了一个大规模的数据集用于事实抽取和证实任务，并提出了一个基本的Pipeline方法用于解决这个任务。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction:"></a>Introduction:</h2><p>首先介绍一下Fact Extraction and VERification (claim verification)任务，见图1。给定一个claim，首先从文档中抽取出能够证实/证伪该claim的证据(evidence)句子，然后根据抽取出的句子判断这些证据对该claim是支持/ 反对/ 不充分的（supported/ refuted/ not enough info）。例如图1中，Claim为”The Rodney King riots took place in the most populous county in the USA.”，根据两个证据句 (1) “The 1992 Los Angeles riots, also known as the Rodney King riots were a series of riots, lootings, arsons, and civil disturbances that occurred in Los Angeles County, California in April and May 1992.”    (2) “Los Angeles County, officially the County of Los Angeles, is the most populous county in the USA.” 可以判断出他们支持（Supported）该Claim的论述。</p>
+<p><img src="https://pic1.zhimg.com/v2-053c8c1f9d6168de4d92c0ed0663a954_b.png" alt="img"></p>
+<center>图1 数据集构成</center>
+
+<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison:"></a><strong>Comparison:</strong></h2><p>本文将FEVER与Textual Entailment (TE)/ Natural Language Inference (NLI)文本蕴含任务以及Question Answering (QA)问答任务进行了比较（关于这两个任务的介绍我放在附录吧，见文末）。与通常只有根据一条固定的文本句来判断是否蕴含的NLI任务相比，FEVER的evidence提取自大量的文档；在QA任务中，问题中通常隐含提供了确定答案的信息，而对于一个claim而言，其缺失的信息通常对于检索反驳证据至关重要。例如Claim: “Fiji’s largest island is Kauai.”可以被检索出的该证据: “Kauai is the oldest Hawaiian Island.” 反驳（即Kauai其实是Hawaiian一个岛，而不是Fiji的），而该Claim中根本没有提到过Hawaiian，即Claim中缺失了这个信息。我的理解的话，是不是可以这样想，对于QA任务，Answer是不会去反驳质疑Question的正确性，而一定会顺着Question找到一个“答案”。</p>
+<h2 id="Motivation-amp-Dataset"><a href="#Motivation-amp-Dataset" class="headerlink" title="Motivation &amp; Dataset:"></a><strong>Motivation &amp; Dataset:</strong></h2><p>作者提出，目前NLI和QA任务都有大规模的数据集供大家研究，但claim verification的数据集相比之下规模却很小（仅几百个claim）。因此，本文提出了一个包含185,445条claim的数据集。数据集的标注构造分为两个阶段：第一阶段，从Wikipedia中抽取claim句子并用各种方式改写他们，其中有可能改变原意；第二阶段，根据claim在文章pages中抽取出evidence，文章中不包括改写该claim时对应的原句。这样构建出的数据集，对于31.75%的claim有不止一个evidence句可以被认为是适当的，16.82%的claim需要多个句子作为evidence进行组合，12.15%的claim其evidence来自多个pages。</p>
+<p>数据集的划分如图2。所有claim所产生的那个Wikipedia的page都包含在其同一个set下，也就是说不会出现某个set里的claim在本set中找不到其被改写原句所在的page的情况。</p>
+<p><img src="https://pic4.zhimg.com/v2-c8a99f3e573c7dbe2e48b7d67ade7543_b.png" alt="img"></p>
+<center>图2 数据集划分</center>
+
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method:"></a><strong>Method:</strong></h2><p>针对FEVER任务，该paper还提出了一个Pipeline的解决方案：给定一个Claim，首先根据Claim识别出相关的文章，从这些文章中选择句子组成evidence证据，根据选择的证据句，对Claim进行分类。该Pipeline可以分为三个模块：Document Retrieval，Sentence Selection和Textual Entailment。</p>
+<p>Document Retrieval: 利用TF-IDF算法计算出文章的词频向量，并计算与原Claim的余弦相似度，找出k个最相似的文章。</p>
+<p>Sentence Selection：同样是利用TF-IDF相似度找出文章中与Claim相似的句子并按照相似度进行排序，利用验证集的结果来调整选取最相似的句子（相当于调参的过程，到底选前多少条最相似的句子作为evidence是通过验证集选出来的）。同时，为了评估Sentence Selection对最后结果的影响，作者还做了省略这一步直接Document Retrieval后做Textual Entailment的实验。</p>
+<p>Textual Entailment：一个简单的baseline是2017 Fake News Challenge一个队伍的做法 ，将evidence和claim的词频TF-IDF余弦相似度输入到有一层隐藏层的MLP得到；另一个比较SOTA的方式是在evidence和claim之间用decomposable attention (DA) model ，是当时斯坦福的NLI任务评测中有公开代码的最高分数模型，同时这个模型不需要对文本进行语法分析，也没有用集成结果。对于not enough info这一类而言，没有对应的evidence的golden label，因此无法使用上面两个方法训练，所以作者模拟了这一类的训练数据，通过从最相似的文章中sample一个句子或者随机地从Wikipedia中sample的句子组成。</p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments:"></a><strong>Experiments</strong>:</h2><p>这篇paper做了好几个实验，关于pipeline前两个模块提取evidence的upper bound结果（即只要evidence提取正确就默认后面claim分类是正确的），衡量前两个模块对最终结果的影响等。之后的工作中好像更多地提到的是，是否考虑模型提取出的evidence的正确性，还是只考虑最后三分类结果的准确率。如果同时要求模型提取出的evidence和最后三分类的结果都正确的话，得到的acc为31.87%；如果忽略evidence是否正确，则三分类的acc可以达到50.91%。说明在某些情况下，虽然模型能够成功地判断claim是否正确，但是它所依据的evidence其实跟人类标注的不一样，模型在测试集上前两个模块中找evidence的F1才17.47%。</p>
+<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a><strong>附录：</strong></h2><p>Textual Entailment (TE) / Natural Language Inference (NLI)文本蕴含：文本蕴含关系描述的是两个文本之间的推理关系，其中一个文本作为前提（premise），另一个文本作为假设（hypothesis），如果根据前提P能够推理得出假设H，那么就说P蕴含H。而该任务主要目标是对前提和假设进行判断，判断其是否具有蕴含关系（entailment，contradiction，neutral），即作为一个文本分类任务。 </p>
+<p>Question Answering (QA)问答：分为基于知识图谱，基于阅读理解两种QA。事实性的QA任务从知识图谱中寻找问题的答案；而基于阅读理解的QA任务会从非结构化的文章中获取答案，本文所提到的这篇paper 应该主要是与这个任务进行了比较。基于阅读理解的QA任务可以分成匹配式QA，抽取式QA和生成式QA：匹配式QA是给定文章，问题，和一个候选答案集（一般是实体或者单词），从候选答案中选一个score最高的作为答案；抽取式QA是给定一篇文章，围绕这篇文章提出一些问题，然后从文章中抽取出答案；生成式QA中的答案可能出现在某篇文章/多篇文章，或者没在所有文章中出现，由原文/ 原文+问题/ 原文+新词等形式生成。 </p>
+<p>（题外话：大家都好会取名字啊，怎么都要硬凑一个单词缩写出来e.g. FEVER, BERT, etc.）</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>GEAR: Graph-based Evidence Aggregating and Reasoning for Fact Verification <a href="https://www.aclweb.org/anthology/P19-1085" target="_blank" rel="noopener">https://www.aclweb.org/anthology/P19-1085</a></li>
+<li>FEVER: a large-scale dataset for Fact Extraction and VERification <a href="http://aclweb.org/anthology/N18-1074" target="_blank" rel="noopener">http://aclweb.org/anthology/N18-1074</a></li>
+<li>A simple but tough-to-beat baseline for the Fake News Chal- lenge stance detection task. <a href="https://arxiv.org/abs/1707.03264" target="_blank" rel="noopener">https://arxiv.org/abs/1707.03264</a></li>
+<li>A decomposable attention model for natural language inference. <a href="https://aclweb.org/anthology/D16-" target="_blank" rel="noopener">https://aclweb.org/anthology/D16-</a></li>
+<li>自然语言推理-文本蕴含识别简介 <a href="https://blog.csdn.net/u010960155/article/details/81335067" target="_blank" rel="noopener">https://blog.csdn.net/u010960155/article/details/81335067</a></li>
+<li>问答系统总结(Question Answering System, QA) <a href="https://www.cnblogs.com/baobaotql/p/13820871.html" target="_blank" rel="noopener">https://www.cnblogs.com/baobaotql/p/13820871.html</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/Fact-Verification/" rel="tag"># Fact Verification</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/28/Group-Pre-Few-Shot-Lifelong-Learning-A-Tiny-Survey/" rel="next" title="[Group Pre] Few-Shot Lifelong Learning: A Tiny Survey">
+                <i class="fa fa-chevron-left"></i> [Group Pre] Few-Shot Lifelong Learning: A Tiny Survey
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/" rel="prev" title="[Reading Notes] Understanding the Behaviour of Contrastive Loss">
+                [Reading Notes] Understanding the Behaviour of Contrastive Loss <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Xiang Li">
+            
+              <p class="site-author-name" itemprop="name">Xiang Li</p>
+              <p class="site-description motion-element" itemprop="description">An Undergraduate in Harbin Institute of Technology, Shenzhen</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/South7X" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiangli@stu.hit.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/li-xiang-46-28-15" target="_blank" title="Zhihu(知乎)">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Zhihu(知乎)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=0OwAye3OV9SO9n8OleAhZ-40dQuWWKi0F6UXV89B5tU"></script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NAACL’18-FEVER-a-large-scale-dataset-for-Fact-Extraction-and-VERification"><span class="nav-number">1.</span> <span class="nav-text">[NAACL’18] FEVER: a large-scale dataset for Fact Extraction and VERification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparison"><span class="nav-number">1.2.</span> <span class="nav-text">Comparison:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-amp-Dataset"><span class="nav-number">1.3.</span> <span class="nav-text">Motivation &amp; Dataset:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.4.</span> <span class="nav-text">Method:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">1.5.</span> <span class="nav-text">Experiments:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录："><span class="nav-number">1.6.</span> <span class="nav-text">附录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">1.7.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

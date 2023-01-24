@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Contrastive Learning,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Also see in my zhihu(知乎) page with better reading experience: https://zhuanlan.zhihu.com/p/406628964 Foreword这次的论文笔记的内容是CVPR’21的一篇论文“Understanding the Behaviour of Contrastive Loss”[1]。与以前看的很多讲模型这类论文不">
+<meta name="keywords" content="Contrastive Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Reading Notes] Understanding the Behaviour of Contrastive Loss">
+<meta property="og:url" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/index.html">
+<meta property="og:site_name" content="Xiang Li">
+<meta property="og:description" content="Also see in my zhihu(知乎) page with better reading experience: https://zhuanlan.zhihu.com/p/406628964 Foreword这次的论文笔记的内容是CVPR’21的一篇论文“Understanding the Behaviour of Contrastive Loss”[1]。与以前看的很多讲模型这类论文不">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/alignment.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/uniform.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/eq2.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/align-unif-plot.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/exchange.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/tsne.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/r_s.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/uniformity_temperature.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/tolerance_temperature.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/hard_1.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/hard_2.png">
+<meta property="og:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/hypersphere.png">
+<meta property="og:updated_time" content="2021-09-18T03:31:12.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Reading Notes] Understanding the Behaviour of Contrastive Loss">
+<meta name="twitter:description" content="Also see in my zhihu(知乎) page with better reading experience: https://zhuanlan.zhihu.com/p/406628964 Foreword这次的论文笔记的内容是CVPR’21的一篇论文“Understanding the Behaviour of Contrastive Loss”[1]。与以前看的很多讲模型这类论文不">
+<meta name="twitter:image" content="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/alignment.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/">
+
+
+
+
+
+  <title>[Reading Notes] Understanding the Behaviour of Contrastive Loss | Xiang Li</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiang Li</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Harbin Institute of Technology, Shenzhen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiang Li">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiang Li">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Reading Notes] Understanding the Behaviour of Contrastive Loss</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-09-03T16:54:08+08:00">
+                2021-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading Notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Also see in my zhihu(知乎) page with better reading experience: <a href="https://zhuanlan.zhihu.com/p/406628964" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/406628964</a></p>
+<h1 id="Foreword"><a href="#Foreword" class="headerlink" title="Foreword"></a>Foreword</h1><p>这次的论文笔记的内容是CVPR’21的一篇论文“Understanding the Behaviour of Contrastive Loss”[1]。与以前看的很多讲模型这类论文不同，这篇paper没有模型，没有SOTA，而是对对比学习的loss中的temperature参数这个点进行深入剖析，更多的是偏数学理论的内容，并做实验进行验证，以此来达到题目所说的理解对比学习损失函数的目的。虽然知乎上已经有了这篇论文的笔记了，我还是决定自己写一遍，对论文的理解和印象可能更深刻一点。</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>在写这篇论文笔记之前，我想先简单写一写对另一篇ICML’20的论文“Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere”[2]的一点背景 ，因为CVPR这篇论文算是一定程度上Follow了他们的工作。</p>
+<p>ICML这篇论文提出了两个对比学习的重要特性：Alignment和Uniformity. 定义如下：</p>
+<blockquote>
+<p><strong>Alignment</strong>: 对于Positive pair中的两个样本，应该被映射到相邻近的特征中。（即Encoder需要将相似的样本编码为相似的特征向量）</p>
+<p><strong>Uniformity</strong>：所有特征向量应该在超球面空间* (hypersphere) 中几乎均匀地分布，以保留数据中尽可能多的信息。（即特征分布需要最大化保留信息）</p>
+</blockquote>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/alignment.png" alt="alignment"><br>  <img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/uniform.png" alt="uniform"></p>
+<p>其实我认为这两个特性也自然地体现了对比学习的目的$s(f(x),f(x^+))&gt;&gt;s(f(x),f(x^-))$，即$x$和与其相似的正样本$x^+$在$f(\cdot)$编码后的相似度$s(\cdot)$，应该远大于$x$和与其不相似的负样本$x^-$编码后的相似度。而这两个特性，从对比学习的loss也能窥知一二。<br>$$<br>\mathcal{L}(x_i)=-\log[\frac{\exp(s_{i,i}/\tau)}{\sum_{k\neq i}\exp(s_{i,k}/\tau)+\exp(s_{i,i}/\tau)}]\ \ \ \ \ \ \ \ \ \  (1)<br>$$<br>其中$s_{i,j}=f(x_i)^Tf(x_j)$ 。 </p>
+<p>可以简单地将二者的公式写成如下形式[3]：(这公式看着简单，要用LaTex打出来可学到好几个命令\underset, \mathop, \limits, \rm什么的)</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/eq2.png" alt="eq2"></p>
+<p>其中，$\mathcal{p}<em>{ pos}$ 为positive pair的分布，$\mathcal{p}</em>{data}$ 为data distribution，即样本数据分布。</p>
+<p>作者通过实验验证了这两个特性与模型性能的关系，即通过以上公式计算出的Alignment和Uniformity两种度量值越小，encoder能够得到更好的表示，模型表现越好（Acc越高）。即下图中越蓝的点，准确率越高，且集中在左下角，两个度量值都很小的地方。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/align-unif-plot.png" alt="align-unif-plot"></p>
+<center>Alignment和Uniform度量值与模型Performance的关系</center>
+
+<p>这两个metric代码也非常简单，作者直接贴到了论文里。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bsz : batch size (number of positive pairs)</span></span><br><span class="line"><span class="comment"># d : latent dim</span></span><br><span class="line"><span class="comment"># x : Tensor, shape=[bsz, d]</span></span><br><span class="line"><span class="comment"># 	latents for one side of positive pairs</span></span><br><span class="line"><span class="comment"># y : Tensor, shape=[bsz, d]</span></span><br><span class="line"><span class="comment"># 	latents for the other side of positive pairs</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">align_loss</span><span class="params">(x, y, alpha=<span class="number">2</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (x - y).norm(p=<span class="number">2</span>, dim=<span class="number">1</span>).pow(alpha).mean()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uniform_loss</span><span class="params">(x, t=<span class="number">2</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> torch.pdist(x, p=<span class="number">2</span>).pow(<span class="number">2</span>).mul(-t).exp().mean().log()</span><br></pre></td></tr></table></figure>
+<p>接下来我们回到最初的CVPR这篇论文。</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>我认为这篇论文就是上一篇的一个递进，其一个核心思想就是引入样本之间潜在的语义结构的概念：模型得到的特征表示过于均匀（uniformity）的话，会不能很好地容忍语义相似的样本（语义相似的样本表示分离较远），从而破坏了这种样本之间潜在的语义结构，影响下游任务的表现。①从这一个idea出发，作者将这种现象定义为一种uniformity-tolerance的两难困境（我们既希望特征表示足够均匀地分布使其便于分割开，又希望其能容忍语义结构相似的样本）；$\rightarrow$ ②而为什么会出现这种现象，作者用对比学习loss中的参数temperature $\tau$ 作为切入点，探讨了其是如何影响embedding的分布；$\rightarrow$ ③而如何影响这种分布是因为temperature的大小控制使得contrastive loss有一种hardness-aware的特性，即temperature越小，对那些更难的负样本的Gradient梯度更大，使得这些样本的特征表示更加分离，从而得到的整体的特征分布更加均匀。这里的更难的负样本，是指那些与锚点anchor $x$ 很相似/属于同一类的样本（对于$x$而言，其增强的样本$x^+$才是正样本，其余都叫做负样本），所以对于encoder来说，要区分开他们的表示会更难。</p>
+<p>虽然我觉得好像我复述的这一段故事好像也说得通，但是这篇论文实际上的结构好像跟我的思路是相反的。作者是③先提出contrastive loss的hardness-aware特性，$\rightarrow$②再提出这种特性是temperature这个参数导致和控制的，$\rightarrow$①最后提出temperature与uniformity之间的关系，并以此定义uniformity-tolerance dilemma这个现象。</p>
+<p>为了更好地理解作者提出的语义结构的影响，作者用下图作解释。对于(a)(b)两种embedding分布而言，我们将$x_j$与$x_k$的embedding交换，并不会改变其对比学习的loss，但是，(a)的这种分布将$x_i,x_j$两个都是“狗”的样本表示集中在一起，$x_l,x_k$两个都是“车”的样本表示集中在一起，比(b)这种分布在下游任务中表现更好，因为它能够体现出样本间潜在的语义结构。我觉得这个图很有意思，当时还以为作者下面要讲怎么在hypershere上通过不停地交换来使得同类样本更近了（大雾）。现在回过头来看，其实这个图也一定程度上体现出uniformity-tolerance的关系，即这个图代表着一种理想情况：当uniformity保持不变时，特征表示却能够更加体现出语义结构（更能容忍语义结构相似的样本）。这也是作者后面做实验想要达到的一个效果。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/exchange.png" alt="exchange"></p>
+<p>那temperature是不是真的会影响embedding的分布呢（②）作者用T-SNE可视化了$ \tau=0.07$ 和$\tau=0.2$ 两种情况下的embedding分布。可以看到$ \tau=0.07$ 时分布更加均匀（uniform），而$\tau=0.2$ 时分布更加局部集中-全局分离（即相似/同类的样本更集中，不相似/不同类的样本相隔更远）。也就是从这里，作者提出uniformity-tolerance困境的（①）。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/tsne.png" alt="s"></p>
+<h1 id="Hardness-aware-Property③"><a href="#Hardness-aware-Property③" class="headerlink" title="Hardness-aware Property③"></a>Hardness-aware Property③</h1><p>作者在对比学习原始loss，即Eq.(1)的基础上，提出一个简单形式的loss，也可以满足拉近positive pair和分隔negative samples的目的：<br>$$<br>\mathcal{L}_{\rm simple}(x_i)=-s_{i,i}+\lambda\sum\limits_{i\neq j}s_{i,j} \ \ \ \ \ \ \ \ \ \  (4)<br>$$<br>作者将Eq.(1)的原始loss对正例相似度$s_{i,i}$和负例相似度$s_{i,j}(j\neq i)$求导，得到以下两个式子：<br>$$<br>\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,i}}=-\frac{1}{\tau}\sum\limits_{k\neq i}P_{i,k} \ \ \ \ \ \ \ \ (5)<br>$$</p>
+<p>$$<br>\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,j}}=\frac{1}{\tau}P_{i,j} \ \ \ \ \ \ \ \ (6)<br>$$</p>
+<p>其中<br>$$<br>P_{i,j}=\frac{\exp(s_{i,j}/\tau)}{\sum_{k\neq i}\exp(s_{i,k}/\tau)+\exp(s_{i,i}/\tau)}  \ \ \ \ \ \ \ \ (7)<br>$$<br>通过(6)作者发现对于不同的negative sample $s_{i,j}$ ，其梯度是与(7)中的分子$\exp(s_{i,j}/\tau)$成比例的（对于样本$i$的所有负样本$j$而言，$P_{i,j}$的分子不同，分母相同），不同的$s_{i,j}$的梯度不同（$s_{i,j}$越大，梯度越大；$\tau$越小，则越放大了这个梯度），因此体现出其Hardness-aware的特性。这个特性与简单化的loss Eq.(4)不同，$\mathcal{L}{\rm simple}$对$s_{i,j}$求导后只是固定的值$\lambda$。</p>
+<p>观察(5)式，其实$P_{i,k}$与(6)式的$P_{i,j}$是一样的（$j$和$k$都只是表示一个不同于$i$的样本，二者可以互换），两个梯度的绝对值之比$(\sum_{k\neq i}|\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,k}}|)/ |\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,i}}|=1$ ，即，$|\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,j}}|/ |\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,i}}|$是满足概率分布的，其和为1。令$r_i(s_{i,j})=|\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,j}}|/ |\frac{\partial\mathcal{L}(x_i)}{\partial s_{i,i}}|$ 来表示对于负样本$x_j$ 的相对梯度。<br>$$<br>r_i(s_{i,j})=\frac{\exp(s_{i,j}/\tau)}{\sum_{k\neq i}\exp(s_{i,k}/\tau)}, i\neq j \ \ \ \ \ \ \ (8)<br>$$<br>根据Eq.(8)，作者画出了不同的$\tau$值下$r_{i,j}$关于$s_{i,j}$的分布，如下图。横坐标为$s_{i,j}$，纵坐标为$r_{i,j}$，不同颜色的线代表不同的$\tau$ 值。可以发现，当temperature $\tau$ 越小（蓝色线），$s_{i,j}$相似度越大时，$r_{i,j}$ 陡增；而$s_{i,j}$相似度很小时，曲线趋于均匀平滑。也就是说，对于与$x_i$ 越相近的负样本$x_j$，loss对其”惩罚”就越大（梯度越大）。当$\tau$非常小时，会导致对比loss只集中火力在离$x_i$最近的那一两个样本上，试图将他们分隔开②。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/r_s.png" alt="r_s"></p>
+<h1 id="Uniformity-Tolerance-Dilemma①"><a href="#Uniformity-Tolerance-Dilemma①" class="headerlink" title="Uniformity-Tolerance Dilemma①"></a>Uniformity-Tolerance Dilemma①</h1><p>作者分别用两小节介绍了Uniformity和Tolerance两个属性，并绘制了在不同数据集下，不同temperature与两个属性值的关系。由于Uniformity在Background那节里介绍过了，这里主要介绍一下Tolerance的定义和计算方式。</p>
+<blockquote>
+<p><strong>Tolernace</strong>: 指对于属于同一类的样本他们的平均相似度，表示语义相关的样本的分布集中程度。</p>
+</blockquote>
+<p>$$<br>T=\underset{x,y\sim p_{\rm data}}{\mathbb E}[(f(x)^Tf(y))\cdot I_{l(x)=l(y)}] \ \ \ \ \ \ \ \  (9)<br>$$</p>
+<p>其中，$l(x)$表示$x$的类别，$I_{l(x)=l(y)}$是一个指示函数（indicator function），当$l(x)=l(y)$时，其值为1；当$l(x)\neq l(y)$时，其值为0。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/uniformity_temperature.png" alt="uni_temp"><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/tolerance_temperature.png" alt="tol_temp"></p>
+<p>Figure 4表示了不同的temperature（横轴）在不同的数据集上对 $-\mathcal{L}<em>{Uniformity}$ 的度量值大小（纵轴），随着temperature的增大，$-\mathcal{L}</em>{Uniformity}$ 在减小，也就是 $\mathcal{L}_{Uniformity}$ 在增大，根据其计算方式，说明embedding的分布变得更不均匀了。而对于Figure 5则可以看到，随着temperatrue的增大，tolerance这个值也在增大，说明语义相关的样本的相似度在变大。一个理想的模型，应该是局部聚集，全局均匀的，也就是tolerance要大的同时，uniformity要小。但根据上面两个图，tolerance增大时，uniformity也在增大；tolerance减小时，uniformity也在减小，这便形成了一个作者所定义的Uniformity-Tolerance Dilemma。所以对于一般的对比学习loss而言，如何选择一个合适的temporature来平衡embedding的聚集性和均匀性，是需要根据具体问题来权衡的。</p>
+<p>我觉得这个思想可以说是一定程度上继承了Background那节里的ICML那篇论文的思想，那里的Alignment和这里的Tolerance很像，但是，也正如我在Introduction开头所写的，这篇论文主要就是引入了样本之间语义结构的概念。Alignment只是考虑了Positive pair的聚集程度，而这篇论文进一步，考虑了同一类相似样本的聚集程度。</p>
+<h1 id="Breaking-Point"><a href="#Breaking-Point" class="headerlink" title="Breaking Point"></a>Breaking Point</h1><p>作者利用了之前的一篇研究工作中提出的Hard contrastive loss策略 [4]，在计算对负样本的梯度时，只截取相似度大于某个阈值的负样本计算（如选取Top K最近的负样本）。这样的话，相当于放大了负样本的作用，使得当temperature变大时，模型最后形成的embedding分布会更均匀一点，而不会像Figure 4 那样随着temperature增大embedding分布变得更不均匀。以此缓解Uniformity-Tolerance Dilemma中调节temperature对uniformity变化的影响。也呼应了Figure 1中“当uniformity保持不变时，特征表示却能够更加体现出语义结构“的目的。</p>
+<p>Hard Contrastive Loss定义如下：<br>$$<br>\mathcal{L}<em>{\rm hard}=-\log \frac{\exp(s</em>{i,i}/\tau)}{\sum_{s_{i,k}\geq s^{(i)}<em>\alpha}\exp(s</em>{i,k}/\tau)+\exp(s_{i,i}/\tau)}  \ \ \ \ \ \ \ \  (10)<br>$$<br>其中，$s^{(i)}_\alpha$ 是负样本与anchor $x_i$ 的一个相似度分界点，对于相似度在 $[s^{(i)}<em>\alpha,1.0]$ 这个区间（informative interval）的负样本被看作是informative hard negative samples（与anchor更相似，更难将他们分隔开），而对于相似度在 $[-1.0,s^{(i)}</em>\alpha]$ 这个区间，则被称作uninformative interval。在计算loss时 $s_{i,j}&lt;s^{(i)}_\alpha$ 的这些负样本，使其$r_i(s_{i,j})=0$。相当于将原本负样本的梯度比例分布（如Figure 3）压缩到informative interval的这个区间，从而增强模型对在该区间内负样本的“惩罚”，集中火力把与 $x_i$ 相似的负样本推远。</p>
+<p>采用$\mathcal{L}_{\rm hard}$ 得到的不同数据集下，不同temperature与Uniformity和Tolerance两个属性值的关系图如下。将Figure 6和Figure 4相比可以发现，此时随着temperature增大，Uniformity保持较稳定不变。此时增大temperature便可以在保持uniformity不增大的情况下，增大Tolerance，即模型得到的embedding既保持均匀，又能局部聚集，从而保留一定潜在语义结构，破解上一节所说的Uniformity-Tolerance Dilemma问题。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/hard_1.png" alt="hard-1"> <img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/hard_2.png" alt="hard_2"></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>在本篇论文中，作者从temperature这个参数入手，从理论和实验的角度指出Contrastive Loss是一个hardness-aware的损失函数，而temperature在控制embedding分布中扮演着重要作用，并由此提出一种Uniformity-Tolerance Dilemma问题。针对这个问题，未来还有待研究。</p>
+<p>* 注1: <strong>超球面空间hypersphere</strong>: 当所有类别的样本很好地各自聚集在一起并在空间中形成一个球面时，他们是线性可分的。而这一特性是欧几里得空间做不到的。如下图，用一个线性分类器，可以找到一个角度切割球面将“猫”这一类的样本与其他样本分隔开。</p>
+<p><img src="/2021/09/03/Reading-Notes-Understanding-the-Behaviour-of-Contrastive-Loss/hypersphere.png" alt="hypersphere"></p>
+<center>Hypersphere</center>
+
+<p>[1] <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Wang_Understanding_the_Behaviour_of_Contrastive_Loss_CVPR_2021_paper.pdf" target="_blank" rel="noopener">Understanding the Behaviour of Contrastive Loss</a> , CVPR 2021</p>
+<p>[2] <a href="https://proceedings.mlr.press/v119/wang20k.html" target="_blank" rel="noopener">Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere</a> ICML 2020</p>
+<p>[3] <a href="http://arxiv.org/abs/2104.08821" target="_blank" rel="noopener">SimCSE: Simple Contrastive Learning of Sentence Embeddings</a></p>
+<p>[4] <a href="https://openaccess.thecvf.com/content_ICCV_2019/papers/Zhuang_Local_Aggregation_for_Unsupervised_Learning_of_Visual_Embeddings_ICCV_2019_paper.pdf" target="_blank" rel="noopener">Local aggregation for unsupervised learning of visual embeddings</a> ICCV 2019</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Contrastive-Learning/" rel="tag"># Contrastive Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/17/Reading-Notes-Fact-Extraction-Verification-1/" rel="next" title="[Reading Notes] Fact Extraction & Verification (1)">
+                <i class="fa fa-chevron-left"></i> [Reading Notes] Fact Extraction & Verification (1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Xiang Li">
+            
+              <p class="site-author-name" itemprop="name">Xiang Li</p>
+              <p class="site-description motion-element" itemprop="description">An Undergraduate in Harbin Institute of Technology, Shenzhen</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/South7X" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiangli@stu.hit.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/li-xiang-46-28-15" target="_blank" title="Zhihu(知乎)">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Zhihu(知乎)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=0OwAye3OV9SO9n8OleAhZ-40dQuWWKi0F6UXV89B5tU"></script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">2.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hardness-aware-Property③"><span class="nav-number">4.</span> <span class="nav-text">Hardness-aware Property③</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Uniformity-Tolerance-Dilemma①"><span class="nav-number">5.</span> <span class="nav-text">Uniformity-Tolerance Dilemma①</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Breaking-Point"><span class="nav-number">6.</span> <span class="nav-text">Breaking Point</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

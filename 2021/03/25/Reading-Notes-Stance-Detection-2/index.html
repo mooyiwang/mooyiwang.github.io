@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NLP,Stance Detection,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[EMNLP’20] DeSMOG: Detecting Stance in Media On Global Warming作者（Dan Jurafsky !!!哇）专门针对global warming这个话题做了一个数据集，强调在讨论该话题时，人们通常引用并评价他人的观点来表达自己的观点的情况。例如：  Leading scientists agree that global warming i">
+<meta name="keywords" content="NLP,Stance Detection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Reading Notes] Stance Detection (2)">
+<meta property="og:url" content="http://yoursite.com/2021/03/25/Reading-Notes-Stance-Detection-2/index.html">
+<meta property="og:site_name" content="Xiang Li">
+<meta property="og:description" content="[EMNLP’20] DeSMOG: Detecting Stance in Media On Global Warming作者（Dan Jurafsky !!!哇）专门针对global warming这个话题做了一个数据集，强调在讨论该话题时，人们通常引用并评价他人的观点来表达自己的观点的情况。例如：  Leading scientists agree that global warming i">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-e14003c9fd8d85dc6854382bed0a8f69_b.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-f119966b5f1bc898f8f388584cbb9f60_b.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-fd39ff57aba6c7df039199136a12df92_b.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-42ad507b0d1d9e4fd45412c16680b30a_b.png">
+<meta property="og:updated_time" content="2021-08-22T13:33:47.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Reading Notes] Stance Detection (2)">
+<meta name="twitter:description" content="[EMNLP’20] DeSMOG: Detecting Stance in Media On Global Warming作者（Dan Jurafsky !!!哇）专门针对global warming这个话题做了一个数据集，强调在讨论该话题时，人们通常引用并评价他人的观点来表达自己的观点的情况。例如：  Leading scientists agree that global warming i">
+<meta name="twitter:image" content="https://pic2.zhimg.com/v2-e14003c9fd8d85dc6854382bed0a8f69_b.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/25/Reading-Notes-Stance-Detection-2/">
+
+
+
+
+
+  <title>[Reading Notes] Stance Detection (2) | Xiang Li</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiang Li</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Harbin Institute of Technology, Shenzhen</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/25/Reading-Notes-Stance-Detection-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiang Li">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiang Li">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Reading Notes] Stance Detection (2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-25T21:12:49+08:00">
+                2021-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading-Notes/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading Notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="EMNLP’20-DeSMOG-Detecting-Stance-in-Media-On-Global-Warming"><a href="#EMNLP’20-DeSMOG-Detecting-Stance-in-Media-On-Global-Warming" class="headerlink" title="[EMNLP’20] DeSMOG: Detecting Stance in Media On Global Warming"></a>[EMNLP’20] DeSMOG: Detecting Stance in Media On Global Warming</h2><p>作者（Dan Jurafsky !!!哇）专门针对global warming这个话题做了一个数据集，强调在讨论该话题时，人们通常引用并评价他人的观点来表达自己的观点的情况。例如：</p>
+<blockquote>
+<p><em>Leading</em> scientists <em>agree</em> that global warming is a serious concern. <em>Mistaken</em> scientists <em>claim</em> that global warming is serious.</p>
+</blockquote>
+<p>作者将这种现象归纳为[ENTITY] [EXPRESS] [STATEMENT] 的模式，分别对应为SOURCE, PREDICATE, OPINION。当使用不同的主张动词（agree/ claim）时会形成对该句子不同的理解</p>
+<p><img src="https://pic2.zhimg.com/v2-e14003c9fd8d85dc6854382bed0a8f69_b.png" alt="img"></p>
+<p>针对这个现象，作者提出了两个问题：</p>
+<blockquote>
+<p>Q1: Do different sides of a debate (in this case, GW-accepting and GW-skeptical media) show symmetry in their use of self-affirming and opponent-doubting discourse? 辩论双方（认同/怀疑全球变暖的媒体双方）是否在肯定自己和否定对方的论述使用中呈现出对称性？ Q2: In cases where OPINIONS are ascribed to a named entity with a known (public) stance, does the stance of the OPINION match the expected stance of the named entity? 当观点归因于一个有着公认立场的命名实体时，该观点所表达的立场是否与该命名实体一致？（没举个例子有点晦涩难懂哈，简单来说，就是OPINION的立场是否与SOURCE的立场相符吧）</p>
+</blockquote>
+<p>实验分析：作者利用种子词及WordNet扩展得到肯定词库(affirming devices)和怀疑词库(doubting devices)。对于问题一，实验结果表明在认同全球变暖的媒体论述中，self-affirming的比例远多于opponent-doubting，而在怀疑全球变暖的媒体论述中，二者比例几乎持平；对于问题二，双方分别有37%和38%的instance是不相符的，但是在GW-skeptical media(RL)中这些引用来源相比于GW-accepting(LL)广泛得多，同时作者还对双方使用的主张词（就是中间那个动词啦我也不知道怎么翻译）的差别进行了统计，总结出了发生以上不相符情况的常用词，例如acknowledge, admit, etc.</p>
+<p>这篇paper跟之前看的都不太一样，全篇没有提到什么新的模型，没有用普遍的数据集，但是却以一个独特的视角分析了Global warming这个单独的话题，很多语言学，社会学，统计上的分析，写的句子也有点难懂，第一遍的时候真的没看下去（我发现了，有没有公式我都看不下去哎）。感觉跟之前在B站看到Dan Jurafsky的一个访谈节目里对他的印象一样，他们都在研究一些真的有趣有用的东西，敏锐的观察和新颖的思考，提出并解决新的问题，而不是在什么数据集上刷SOTA，调模型。希望以后我也能像他们一样吧，这样的research才是有灵魂的。</p>
+<h2 id="EMNLP’20-Unsupervised-stance-detection-for-arguments-from-consequences"><a href="#EMNLP’20-Unsupervised-stance-detection-for-arguments-from-consequences" class="headerlink" title="[EMNLP’20] Unsupervised stance detection for arguments from consequences"></a><strong>[EMNLP’20] Unsupervised stance detection for arguments from consequences</strong></h2><p>这篇paper时专门针对一种表达立场的模式做无监督的立场检测。具体来说，作者提到我们在表达观点时，经常提及某个事件发生的后果来支持我们的观点/反对他人的观点，即argument from consequences，具体来说</p>
+<blockquote>
+<p><em>If A is brought about, then good (bad) consequences will (may plausibly) occur</em>, and a conclusion <em>A should (not) be brought about</em>. </p>
+</blockquote>
+<p>于是，作者提出一种pattern来匹配/建模这种表达方式，并直接根据pattern的结果推理出其所表达的stance。此外，本文还提出了一个满足这种模式的数据集。</p>
+<blockquote>
+<p>&lt; (T, dir), (P, eff ), (O, sent) &gt; 其中T表示target，dir=1表示陈述是夸大target，dir=-1表示陈述在减弱target；P表示predicate，eff=1为积极作用，eff=-1为消极作用；O即object，sent=1表示该object被视为积极情感的事情，sent=-1为消极的事。</p>
+</blockquote>
+<p>然后作者先提取出以上三元组，利用规定好的pattern规则，实现无监督判断一个句子对于目标的立场。</p>
+<p><img src="https://pic1.zhimg.com/v2-f119966b5f1bc898f8f388584cbb9f60_b.png" alt="img"></p>
+<p>##<strong>[WWW’19] From Stances’ Imbalance to Their HierarchicalRepresentation and Detection</strong> </p>
+<p>适用于Fake news领域的stance detection，target对应claims（新闻标题），tweet对应evidence（新闻内容）。作者提出原来的数据存在类别数据量不平衡的问题，因此将agree, disagree, discuss合并为related这个类别，提出两层神经网络模型，第一层先判断是related还是unrelated，第二层判断是agree/disagree/discuss。同时，两层的误差传播有三种方式，1认为两层没有依赖关系，不联合传播误差；2认为两层有关系；3通过MMD这种算法来学习二者的依赖性判断是否传播误差。</p>
+<p><img src="https://pic3.zhimg.com/v2-fd39ff57aba6c7df039199136a12df92_b.png" alt="img"></p>
+<h2 id="SIGIR’19-Modeling-Transferable-Topics-for-Cross-Target-Stance-Detection"><a href="#SIGIR’19-Modeling-Transferable-Topics-for-Cross-Target-Stance-Detection" class="headerlink" title="[SIGIR’19] Modeling Transferable Topics for Cross-Target Stance Detection"></a><strong>[SIGIR’19] Modeling Transferable Topics for Cross-Target Stance Detection</strong></h2><p>本文的任务是跨立场检测，提出在target之间有隐藏的话题(lantent topic)可以作为迁移的知识（target之间内在联系/共通点），利用无标注的target下的数据得到topic knowledge，作为memory融入到分类器中。一个弊端是，需要人工来判断是否target之间有隐藏的联系，例如本文只提到了两对相似的可以进行迁移的target（Feminist Movement与Legalization of Abortion， Hillary Clinton与Donald Trump），局限性太大，不能应对现实情况中，各种target无规律出现的情况。</p>
+<p><img src="https://pic3.zhimg.com/v2-42ad507b0d1d9e4fd45412c16680b30a_b.png" alt="img"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>DeSMOG: Detecting Stance in Media On Global Warming <a href="https://www.aclweb.org/anthology/2020.findings-emnlp.296" target="_blank" rel="noopener">https://www.aclweb.org/anthology/2020.findings-emnlp.296</a></li>
+<li>Unsupervised stance detection for arguments from consequences <a href="https://www.aclweb.org/anthology/2020.emnlp-main.4" target="_blank" rel="noopener">https://www.aclweb.org/anthology/2020.emnlp-main.4</a></li>
+<li>From Stances’ Imbalance to Their HierarchicalRepresentation and Detection <a href="http://dl.acm.org/citation.cfm?doid=3308558.3313724" target="_blank" rel="noopener">http://dl.acm.org/citation.cfm?doid=3308558.3313724</a></li>
+<li>Modeling Transferable Topics for Cross-Target Stance Detection <a href="https://dl.acm.org/doi/10.1145/3331184.3331367" target="_blank" rel="noopener">https://dl.acm.org/doi/10.1145/3331184.3331367</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/Stance-Detection/" rel="tag"># Stance Detection</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/14/Reading-Notes-Stance-Detection-1/" rel="next" title="[Reading Notes] Stance Detection (1)">
+                <i class="fa fa-chevron-left"></i> [Reading Notes] Stance Detection (1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/05/28/Group-Pre-Few-Shot-Lifelong-Learning-A-Tiny-Survey/" rel="prev" title="[Group Pre] Few-Shot Lifelong Learning: A Tiny Survey">
+                [Group Pre] Few-Shot Lifelong Learning: A Tiny Survey <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Xiang Li">
+            
+              <p class="site-author-name" itemprop="name">Xiang Li</p>
+              <p class="site-description motion-element" itemprop="description">An Undergraduate in Harbin Institute of Technology, Shenzhen</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/South7X" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiangli@stu.hit.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/li-xiang-46-28-15" target="_blank" title="Zhihu(知乎)">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Zhihu(知乎)</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+          <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=0OwAye3OV9SO9n8OleAhZ-40dQuWWKi0F6UXV89B5tU"></script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EMNLP’20-DeSMOG-Detecting-Stance-in-Media-On-Global-Warming"><span class="nav-number">1.</span> <span class="nav-text">[EMNLP’20] DeSMOG: Detecting Stance in Media On Global Warming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EMNLP’20-Unsupervised-stance-detection-for-arguments-from-consequences"><span class="nav-number">2.</span> <span class="nav-text">[EMNLP’20] Unsupervised stance detection for arguments from consequences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SIGIR’19-Modeling-Transferable-Topics-for-Cross-Target-Stance-Detection"><span class="nav-number">3.</span> <span class="nav-text">[SIGIR’19] Modeling Transferable Topics for Cross-Target Stance Detection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiang Li</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
