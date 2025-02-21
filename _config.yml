@@ -1,8 +1,10 @@
 # Basic Information 
-title: Your Name  TESY
-position: Ph.D. Student TEST
-affiliation: Your Affiliation
-email: yourname (at) example.edu
+title: Muyi WANG
+position: Ph.D. Student
+affiliation: The Chinese University of Hong Kong
+email: muyi.wang (at) link.cuhk.edu.hk
+affiliation_link: https://www.cuhk.edu.hk/
+affiliation_logo: ./assets/img/cuhk_logo.svg
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
