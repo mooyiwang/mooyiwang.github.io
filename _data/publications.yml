@@ -1,13 +1,13 @@
 main:
 
   - title: "PITA: Prompting Task Interaction for Argumentation Mining"
-    authors: Yang Sun*, <strong>Muyi Wang1*</strong>, Jianzhu Bao, Bin Liang, Xiaoyan Zhao, Caihua Yang, Min Yang and Ruifeng Xu
+    authors: Yang Sun*, <strong>Muyi Wang*</strong>, Jianzhu Bao, Bin Liang, Xiaoyan Zhao, Caihua Yang, Min Yang and Ruifeng Xu
     conference_short: ACL
     conference: The 62nd Annual Meeting of the Association for Computational Linguistics <strong>(ACL)</strong>, 2024.
     pdf: https://aclanthology.org/2024.acl-long.275.pdf
     code: https://github.com/syiswell/PITA
     bibtex: https://aclanthology.org/2024.acl-long.275.bib
-    image: ./assets/img/teaser_pita.pdf
+    image: ./assets/img/teaser_pita.png
     # notes: Early Accept
 
   # - title: "Mnemonics Training: Multi-Class Incremental Learning without Forgetting"
