@@ -8,8 +8,8 @@ Hi! I am Muyi Wang (王 木一), a PhD student at the Department of Information 
 
 ## Research Interests
 
-- **Computer Vision:** image recognition, image generation, video captioning
-- **Machine Learning:** meta-learning, incremental learning, transfer learning
+<!-- - **Computer Vision:** image recognition, image generation, video captioning
+- **Machine Learning:** meta-learning, incremental learning, transfer learning -->
 
 ## Education
 
